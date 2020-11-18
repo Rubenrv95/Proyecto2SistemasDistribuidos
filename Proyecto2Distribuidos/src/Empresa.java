@@ -1,10 +1,6 @@
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,24 +14,27 @@ import java.net.Socket;
  */
 public class Empresa {
 
-    static final String HOST = "localhost";
+  //  static final String HOST = "empresa";
     static final int PUERTO=5000;
     
     public Empresa () {
-        try{
-            Socket skCliente = new Socket(HOST, PUERTO);
-            InputStream aux = skCliente.getInputStream();
-            DataInputStream flujo = new DataInputStream( aux );
-            DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("Ingrese operacion [operador x y]: ");
-            String mensaje = reader.readLine();
-
-            dOut.writeUTF(mensaje);
-            System.out.println( flujo.readUTF() );
-            skCliente.close();
-        } catch(Exception e ) {
+        try {
+            ServerSocket skServidor = new ServerSocket( PUERTO );
+            System.out.println("Escucho el puerto " + PUERTO );
+            int opcion=1;
+            while (opcion!=0) {
+                System.out.println("asdda");
+                Socket skCliente = skServidor.accept(); // Crea objeto
+               // System.out.println("Sirvo al cliente " + numCli);
+                OutputStream aux = skCliente.getOutputStream();
+                DataOutputStream flujo= new DataOutputStream( aux );
+                DataInputStream dIn = new DataInputStream(skCliente.getInputStream());
+                flujo.writeUTF( "consulta resivida: "+dIn.readUTF());
+                System.out.println("asd");
+                skCliente.close();
+        }
+        System.out.println("Demasiados clientes por hoy");
+        } catch( Exception e ) {
             System.out.println( e.getMessage() );
         }
     }
@@ -45,7 +44,7 @@ public class Empresa {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new Empresa();
     }
     
 }
