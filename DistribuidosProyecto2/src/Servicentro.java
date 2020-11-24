@@ -1,5 +1,11 @@
 import java.io.*;
 import java.net.*;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,7 +17,7 @@ import java.net.*;
  *
  * @author Luciano
  */
-public class Servicentro {
+public class Servicentro extends Application {
     
     int valor93;
     int valor95;
@@ -31,7 +37,10 @@ public class Servicentro {
         DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Eliga una operación]: ");
+        //Stage stage = new Stage();
+        launch();
+        //this.start(stage);
+        System.out.print("Eliga una operación: ");
         String mensaje = "test";
 
         dOut.writeUTF(mensaje);
@@ -52,12 +61,21 @@ public class Servicentro {
         
     }
     
-    
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
+        
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        stage.show();
+    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         new Servicentro();
     }
     
