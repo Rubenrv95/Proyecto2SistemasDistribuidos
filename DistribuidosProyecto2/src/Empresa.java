@@ -21,16 +21,18 @@ public class Empresa {
         try {
             ServerSocket skServidor = new ServerSocket( PUERTO );
             System.out.println("Escucho el puerto " + PUERTO );
+        //    Servicentro.main(new String[0]);
+            Process p = Runtime.getRuntime().exec("javac Servicentro.java");
+            Process p2 = Runtime.getRuntime().exec("java Servicentro");
             int opcion=1;
             while (opcion!=0) {
-                System.out.println("asdda");
+                System.out.println("Esperando cliente");
                 Socket skCliente = skServidor.accept(); // Crea objeto
                // System.out.println("Sirvo al cliente " + numCli);
                 OutputStream aux = skCliente.getOutputStream();
                 DataOutputStream flujo= new DataOutputStream( aux );
                 DataInputStream dIn = new DataInputStream(skCliente.getInputStream());
                 flujo.writeUTF( "consulta resivida: "+dIn.readUTF());
-                System.out.println("asd");
                 skCliente.close();
         }
         System.out.println("Demasiados clientes por hoy");
