@@ -32,7 +32,7 @@ public class Servicentro {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Eliga una operación]: ");
-        String mensaje = "poto";
+        String mensaje = "test";
 
         dOut.writeUTF(mensaje);
         System.out.println( flujo.readUTF() );
