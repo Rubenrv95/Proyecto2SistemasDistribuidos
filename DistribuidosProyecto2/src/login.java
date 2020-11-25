@@ -13,11 +13,11 @@ import java.util.logging.Logger;
  */
 public class login {
     
-    private String url ="ruben@45.236.129.24";
-    private String userDB = "ruben";
-    private String passDB = "sistemasdistribuidos";
+    private static String url ="jdbc:mysql://ruben@45.236.129.24/empresa";
+    private static String usuarioBD = "ruben";
+    private static String contraseñaDB = "sistemasdistribuidos";
 
-    public login() {
+    public login(){
         Connection con;
         Statement stmt;
         ResultSet rs;
@@ -32,13 +32,16 @@ public class login {
         
         
         try {
-            con = DriverManager.getConnection(url, this.userDB, this.passDB);
+            con = DriverManager.getConnection(url, usuarioBD, contraseñaDB);
+            System.out.println("Conectado");
             stmt = con.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM");
-            rs.next();
+            rs = stmt.executeQuery("SELECT * FROM central");
+            while (rs.next()) {
+                System.out.println(rs.getString("user") + " " + rs.getString("pass"));
+            }
         }
         catch(SQLException e) {
-            System.out.println("Error en la consulta");          
+            System.out.println(e);          
         }
         
 
