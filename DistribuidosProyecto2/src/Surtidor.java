@@ -23,11 +23,15 @@ public class Surtidor {
     static final String HOST = "localhost";
     static final int PUERTO = 5001;
     public boolean ocupado = false;
-    public int valor;
+    public int valor93;
+    public int valor95;
+    public int valor97;
+    public int valorDiesel;
+    public int valorKerosene;
     
     public Surtidor() throws InterruptedException{
         
-        generarCarga(1, true);
+        generarCarga(1, true, "Bencina");
         
     }
     
@@ -54,16 +58,44 @@ public class Surtidor {
         }
     }
     
-    public void generarCarga(int cantidad, boolean litros) throws InterruptedException
+    public void actualizarPrecios()
     {
-        int valorActual=714; //= consulta bd;
+        this.valor93=0;//preguntar a base de datos
+        this.valor95=0;//preguntar a base de datos
+        this.valor97=0;//preguntar a base de datos
+        this.valorDiesel=0;//preguntar a base de datos
+        this.valorKerosene=0;//preguntar a base de datos
+    }
+    
+    public void generarCarga(int cantidad, boolean litros, String tipo) throws InterruptedException
+    {
+        int valorActual=0; //= consulta bd;
+        switch (tipo)
+        {
+            case "1":   //93
+                valorActual=this.valor93; //= consulta bd;
+                break;
+            case "2":   //95
+                valorActual=this.valor95; //= consulta bd;
+                break;
+            case "3":   //97
+                valorActual=this.valor97; //= consulta bd;
+                break;
+            case "4":   //Diesel
+                valorActual=this.valorDiesel; //= consulta bd;
+                break;
+            case "5":   //Kerosene
+                valorActual=this.valorKerosene; //= consulta bd;
+                break;
+                    
+        }        
         
         this.ocupado=true;
         if (litros) {
             sleep(cantidad);
         }
         else{
-            cantidad = cantidad/this.valor;
+            cantidad = cantidad/valorActual;
             sleep(cantidad);
         }
         int total=cantidad*valorActual;
