@@ -1,5 +1,11 @@
 import java.io.*;
 import java.net.*;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,35 +17,15 @@ import java.net.*;
  *
  * @author Luciano
  */
-public class Servicentro {
+public class Servicentro extends Application {
     
-    int valor93;
-    int valor95;
-    int valor97;
-    int valorDiesel;
-    int valorKerosene;
     
-    static final String HOST = "localhost";
-    static final int PUERTO=5000;
+    static final String HOSTsrv = "192.168.1.126"; //empresa
+    static final int PUERTOsrv = 5000;
     
     public Servicentro()
     {
-        try{
-        Socket skCliente = new Socket(HOST, PUERTO);
-        InputStream aux = skCliente.getInputStream();
-        DataInputStream flujo = new DataInputStream( aux );
-        DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Eliga una operación]: ");
-        String mensaje = "poto";
-
-        dOut.writeUTF(mensaje);
-        System.out.println( flujo.readUTF() );
-        skCliente.close();
-        } catch(Exception e ) {
-            System.out.println( e.getMessage() );
-        }
+        iniciarListener();
     }
     
     public void generarReporte()
@@ -52,13 +38,39 @@ public class Servicentro {
         
     }
     
+
+    private void iniciarListener() {
+        Thread hilo;
+        hilo = new ServicentroCliente();
+        hilo.start();
+       
+    }
+       
+
     
+    public void ingresarCarga(String mensaje)
+    {
+        
+    }
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
+        
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        stage.show();
+    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         new Servicentro();
     }
+
+
     
 }
