@@ -19,14 +19,16 @@ import java.net.Socket;
  */
 public class Surtidor {
     
-    String nombre;
+    public String nombre;
     static final String HOST = "localhost";
     static final int PUERTO = 5001;
     public boolean ocupado = false;
     public int valor;
     
     public Surtidor() throws InterruptedException{
+        
         generarCarga(1, true);
+        
     }
     
     public void conectar(){

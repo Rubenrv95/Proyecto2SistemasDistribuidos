@@ -22,6 +22,7 @@ public class Servicentro extends Application {
     
     static final String HOSTsrv = "192.168.1.126"; //empresa
     static final int PUERTOsrv = 5000;
+    static final String nombre = "nombre";
     
     public Servicentro()
     {
@@ -41,7 +42,7 @@ public class Servicentro extends Application {
 
     private void iniciarListener() {
         Thread hilo;
-        hilo = new ServicentroCliente();
+        hilo = new ServicentroCliente(this.nombre);
         hilo.start();
        
     }
