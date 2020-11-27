@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import static java.lang.Thread.sleep;
 import java.net.Socket;
+import java.sql.SQLException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -28,6 +29,8 @@ public class Surtidor {
     public int valor97;
     public int valorDiesel;
     public int valorKerosene;
+    
+    login l = new login();
     
     public Surtidor() throws InterruptedException{
         
@@ -58,13 +61,13 @@ public class Surtidor {
         }
     }
     
-    public void actualizarPrecios()
+    public void actualizarPrecios() throws SQLException
     {
-        this.valor93=0;//preguntar a base de datos
-        this.valor95=0;//preguntar a base de datos
-        this.valor97=0;//preguntar a base de datos
-        this.valorDiesel=0;//preguntar a base de datos
-        this.valorKerosene=0;//preguntar a base de datos
+        this.valor93= l.obtenerPrecio("valor93");;//preguntar a base de datos
+        this.valor95= l.obtenerPrecio("valor95");;//preguntar a base de datos
+        this.valor97= l.obtenerPrecio("valor97");;//preguntar a base de datos
+        this.valorDiesel=l.obtenerPrecio("valorDiesel");;//preguntar a base de datos  
+        this.valorKerosene=l.obtenerPrecio("valorKerosene");;//preguntar a base de datos
     }
     
     public void generarCarga(int cantidad, boolean litros, String tipo) throws InterruptedException
@@ -74,6 +77,7 @@ public class Surtidor {
         {
             case "1":   //93
                 valorActual=this.valor93; //= consulta bd;
+                
                 break;
             case "2":   //95
                 valorActual=this.valor95; //= consulta bd;
