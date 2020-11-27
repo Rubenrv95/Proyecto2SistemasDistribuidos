@@ -20,8 +20,10 @@ import java.net.Socket;
 public class ServicentroCliente extends Thread{
     static final int PUERTOclt = 5001;
     static final String HOSTsrv = "192.168.1.126";  
+    public String nombre;
 
-    public ServicentroCliente() {
+    public ServicentroCliente(String nombre) {
+        this.nombre = nombre;
     }
     
 
