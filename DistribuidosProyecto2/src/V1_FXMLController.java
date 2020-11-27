@@ -45,39 +45,44 @@ public class V1_FXMLController implements Initializable {
     @FXML
     static private Text precioKerosene;
     
+    private boolean esLitros = false;
+    private int cantidad = 0;
+    
     @FXML
     private void clickAceptarMonto(ActionEvent event) {
-        
+        this.cantidad = Integer.parseInt(V1_FXMLController.ingresoMonto.getText());
+        this.esLitros = false;
     }
     
     @FXML
     private void clickAceptarLitros(ActionEvent event) {
-        
+        this.cantidad = Integer.parseInt(V1_FXMLController.ingresoLitro.getText());
+        this.esLitros = true;
     }
 
     @FXML
     private void clickBencina93(ActionEvent event) {
-        
+        Surtidor.generarCarga(this.cantidad, this.esLitros, "1");
     }
     
     @FXML
     private void clickBencina95(ActionEvent event) {
-        
+        Surtidor.generarCarga(this.cantidad, this.esLitros, "2");
     }   
     
     @FXML
     private void clickBencina97(ActionEvent event) {
-        
+        Surtidor.generarCarga(this.cantidad, this.esLitros, "3");
     }
     
     @FXML
     private void clickDiesel(ActionEvent event) {
-        
+        Surtidor.generarCarga(this.cantidad, this.esLitros, "4");
     }
     
     @FXML
     private void clickKerosene(ActionEvent event) {
-        
+        Surtidor.generarCarga(this.cantidad, this.esLitros, "5");
     }     
     
     @Override
