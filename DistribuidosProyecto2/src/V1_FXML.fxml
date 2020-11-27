@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V1_FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V1_FXMLController">
     <children>
       <AnchorPane layoutX="15.0" layoutY="14.0" prefHeight="383.0" prefWidth="610.0">
          <children>
@@ -48,18 +48,16 @@
                   </Text>
                </children>
             </AnchorPane>
-              <Button fx:id="aceptarLitro" layoutX="106.0" layoutY="105.0" onAction="#handleButtonAction" text="Carga x Litro" />
+              <Button fx:id="aceptarLitro" layoutX="106.0" layoutY="105.0" onAction="#clickAceptarLitros" text="Carga x Litro" />
               <Label fx:id="label" layoutX="357.0" layoutY="100.0" minHeight="16" minWidth="69" />
             <ImageView fitHeight="253.0" fitWidth="610.0" layoutY="135.0">
                <image>
-                  <Image url="@../../../../../Desktop/pump.png" />
+                  <Image url="@../pump.png" />
                </image>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
+
             </ImageView>
-            <Button fx:id="aceptarMonto" layoutX="422.0" layoutY="79.0" onAction="#handleButtonAction" text="Carga x Monto" />
-            <TextField fx:id="ingresoMonto" layoutX="206.0" layoutY="78.0" prefHeight="25.0" prefWidth="198.0" />
+            <Button fx:id="aceptarMonto" layoutX="422.0" layoutY="79.0" onAction="#clickAceptarMonto" text="Carga x Monto" />
+            <TextField fx:id="ingresoMonto" layoutX="206.0" layoutY="78.0" prefHeight="25.0" prefWidth="198.0" promptText="123" />
             <TextField fx:id="ingresoLitro" layoutX="206.0" layoutY="106.0" prefHeight="25.0" prefWidth="198.0" />
             <Text layoutX="14.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diesel" wrappingWidth="83.00000131130219">
                <font>
@@ -115,27 +113,27 @@
                   <Font name="System Bold" size="52.0" />
                </font>
             </Text>
-            <Button fx:id="diesel" layoutX="13.0" layoutY="296.0" mnemonicParsing="false" opacity="0.41" prefHeight="85.0" prefWidth="83.0">
+            <Button fx:id="diesel" layoutX="13.0" layoutY="296.0" mnemonicParsing="false" onAction="#clickDiesel" opacity="0.41" prefHeight="85.0" prefWidth="83.0">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Button>
-            <Button fx:id="kerosene" layoutX="111.0" layoutY="296.0" mnemonicParsing="false" opacity="0.41" prefHeight="85.0" prefWidth="83.0">
+            <Button fx:id="kerosene" layoutX="111.0" layoutY="296.0" mnemonicParsing="false" onAction="#clickKerosene" opacity="0.41" prefHeight="85.0" prefWidth="83.0">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Button>
-            <Button fx:id="bencina93" layoutX="259.0" layoutY="294.0" mnemonicParsing="false" opacity="0.41" prefHeight="85.0" prefWidth="95.0">
+            <Button fx:id="bencina93" layoutX="259.0" layoutY="294.0" mnemonicParsing="false" onAction="#clickBencina93" opacity="0.41" prefHeight="85.0" prefWidth="95.0">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Button>
-            <Button fx:id="bencina95" layoutX="364.0" layoutY="294.0" mnemonicParsing="false" opacity="0.41" prefHeight="85.0" prefWidth="95.0">
+            <Button fx:id="bencina95" layoutX="364.0" layoutY="294.0" mnemonicParsing="false" onAction="#clickBencina95" opacity="0.41" prefHeight="85.0" prefWidth="95.0">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Button>
-            <Button fx:id="bencina97" layoutX="469.0" layoutY="294.0" mnemonicParsing="false" opacity="0.41" prefHeight="85.0" prefWidth="95.0">
+            <Button fx:id="bencina97" layoutX="469.0" layoutY="294.0" mnemonicParsing="false" onAction="#clickBencina97" opacity="0.41" prefHeight="85.0" prefWidth="95.0">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>

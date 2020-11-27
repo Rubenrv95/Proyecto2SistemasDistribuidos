@@ -19,69 +19,79 @@ import javafx.scene.text.Text;
 public class V1_FXMLController implements Initializable {
     
     @FXML
-    static private Text precioPantalla;
+    private Text precioPantalla;
     
     @FXML
-    static private Text litrosPantalla;
+    private Text litrosPantalla;
     
     @FXML
-    static private TextField ingresoLitro;
+    public TextField ingresoLitro ;
     
     @FXML
-    static private TextField ingresoMonto;
+    public TextField ingresoMonto;
        
     @FXML
-    static private Text precioBencina93;
+    private Text precioBencina93;
     
     @FXML
-    static private Text precioBencina95;
+    private Text precioBencina95;
     
     @FXML
-    static private Text precioBencina97;
+    private Text precioBencina97;
     
     @FXML
-    static private Text precioDiesel;
+    private Text precioDiesel;
     
     @FXML
-    static private Text precioKerosene;
+    private Text precioKerosene;
     
     private boolean esLitros = false;
     private int cantidad = 0;
+
+    public V1_FXMLController() {
+        this.ingresoMonto = new TextField();
+    }
+    
+    
     
     @FXML
     private void clickAceptarMonto(ActionEvent event) {
-        this.cantidad = Integer.parseInt(V1_FXMLController.ingresoMonto.getText());
+        System.out.println(ingresoMonto.getText());
+        String a = ingresoMonto.getText();
+        this.cantidad = Integer.parseInt(a);
         this.esLitros = false;
+        String b = String.valueOf(this.cantidad);
+        this.precioPantalla.setText(b);
     }
     
     @FXML
     private void clickAceptarLitros(ActionEvent event) {
-        this.cantidad = Integer.parseInt(V1_FXMLController.ingresoLitro.getText());
+        this.cantidad = Integer.parseInt(this.ingresoLitro.getText());
         this.esLitros = true;
     }
 
     @FXML
-    private void clickBencina93(ActionEvent event) {
+    private void clickBencina93(ActionEvent event) throws InterruptedException {
         Surtidor.generarCarga(this.cantidad, this.esLitros, "1");
     }
     
     @FXML
-    private void clickBencina95(ActionEvent event) {
+    private void clickBencina95(ActionEvent event) throws InterruptedException {
         Surtidor.generarCarga(this.cantidad, this.esLitros, "2");
     }   
     
     @FXML
-    private void clickBencina97(ActionEvent event) {
+    private void clickBencina97(ActionEvent event) throws InterruptedException {
         Surtidor.generarCarga(this.cantidad, this.esLitros, "3");
     }
     
     @FXML
-    private void clickDiesel(ActionEvent event) {
+    private void clickDiesel(ActionEvent event) throws InterruptedException {
         Surtidor.generarCarga(this.cantidad, this.esLitros, "4");
     }
     
     @FXML
-    private void clickKerosene(ActionEvent event) {
+    private void clickKerosene(ActionEvent event) throws InterruptedException {
         Surtidor.generarCarga(this.cantidad, this.esLitros, "5");
     }     
     
