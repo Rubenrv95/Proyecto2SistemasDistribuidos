@@ -19,36 +19,13 @@ import javafx.stage.Stage;
  */
 public class Servicentro extends Application {
     
-    int valor93;
-    int valor95;
-    int valor97;
-    int valorDiesel;
-    int valorKerosene;
     
-    static final String HOST = "localhost";
-    static final int PUERTO=5000;
+    static final String HOSTsrv = "192.168.1.126"; //empresa
+    static final int PUERTOsrv = 5000;
     
     public Servicentro()
     {
-        try{
-        Socket skCliente = new Socket(HOST, PUERTO);
-        InputStream aux = skCliente.getInputStream();
-        DataInputStream flujo = new DataInputStream( aux );
-        DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        //Stage stage = new Stage();
-        launch();
-        //this.start(stage);
-        System.out.print("Eliga una operación: ");
-        String mensaje = "test";
-
-        dOut.writeUTF(mensaje);
-        System.out.println( flujo.readUTF() );
-        skCliente.close();
-        } catch(Exception e ) {
-            System.out.println( e.getMessage() );
-        }
+        iniciarListener();
     }
     
     public void generarReporte()
@@ -57,6 +34,21 @@ public class Servicentro extends Application {
     }
     
     public void calcularFactorUtilidad()
+    {
+        
+    }
+    
+
+    private void iniciarListener() {
+        Thread hilo;
+        hilo = new ServicentroCliente();
+        hilo.start();
+       
+    }
+       
+
+    
+    public void ingresarCarga(String mensaje)
     {
         
     }
@@ -78,5 +70,7 @@ public class Servicentro extends Application {
         
         new Servicentro();
     }
+
+
     
 }
