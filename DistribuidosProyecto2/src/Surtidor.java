@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import static java.lang.Thread.sleep;
 import java.net.Socket;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,6 +34,8 @@ public class Surtidor extends Application{
     public static int valor97=345;
     public static int valorDiesel=546;
     public static int valorKerosene=567;
+    
+    login l = new login();
     
     public Surtidor() throws InterruptedException{
         
@@ -63,13 +66,13 @@ public class Surtidor extends Application{
         }
     }
     
-    public void actualizarPrecios()
+    public void actualizarPrecios() throws SQLException
     {
-        this.valor93=0;//preguntar a base de datos
-        this.valor95=0;//preguntar a base de datos
-        this.valor97=0;//preguntar a base de datos
-        this.valorDiesel=0;//preguntar a base de datos
-        this.valorKerosene=0;//preguntar a base de datos
+        this.valor93= l.obtenerPrecio("valor93");;//preguntar a base de datos
+        this.valor95= l.obtenerPrecio("valor95");;//preguntar a base de datos
+        this.valor97= l.obtenerPrecio("valor97");;//preguntar a base de datos
+        this.valorDiesel=l.obtenerPrecio("valorDiesel");;//preguntar a base de datos  
+        this.valorKerosene=l.obtenerPrecio("valorKerosene");;//preguntar a base de datos
     }
     
     public static void generarCarga(int cantidad, boolean litros, String tipo) throws InterruptedException

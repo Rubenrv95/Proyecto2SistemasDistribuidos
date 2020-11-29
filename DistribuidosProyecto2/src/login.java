@@ -13,15 +13,15 @@ import java.util.logging.Logger;
  */
 public class login {
     
-    private String url ="ruben@45.236.129.24";
-    private String userDB = "ruben";
-    private String passDB = "sistemasdistribuidos";
+    private static String url ="jdbc:mysql://ruben@45.236.129.24/empresa";
+    private static String usuarioBD = "ruben";
+    private static String contraseñaDB = "sistemasdistribuidos";
+    Connection con;
+    Statement stmt;
+    ResultSet rs;
 
-    public login() {
-        Connection con;
-        Statement stmt;
-        ResultSet rs;
-        
+    public login(){
+           
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } 
@@ -32,17 +32,31 @@ public class login {
         
         
         try {
-            con = DriverManager.getConnection(url, this.userDB, this.passDB);
+            con = DriverManager.getConnection(url, usuarioBD, contraseñaDB);
+            System.out.println("Conectado");
             stmt = con.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM");
-            rs.next();
+            /*
+            rs = stmt.executeQuery("SELECT * FROM central");
+            while (rs.next()) {
+                System.out.println(rs.getString("user") + " " + rs.getString("pass"));
+            }*/
         }
         catch(SQLException e) {
-            System.out.println("Error en la consulta");          
+            System.out.println(e);          
         }
         
 
 
+    }
+    
+    public int obtenerPrecio(String v) throws SQLException {
+        stmt = con.createStatement();
+        rs = stmt.executeQuery("SELECT " + v + " FROM sucursal");
+        
+        int valor = rs.getInt(v);
+        
+        return valor;
+        
     }
     
 }
