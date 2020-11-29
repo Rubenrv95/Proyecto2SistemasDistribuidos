@@ -198,7 +198,7 @@ public class Surtidor extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
         
         Scene scene = new Scene(root);
-        
+        primaryStage.setResizable(false);        
         primaryStage.setScene(scene);
         primaryStage.show();
     }

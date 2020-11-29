@@ -2,6 +2,11 @@
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author Luciano
  */
-public class Empresa {
+public class Empresa extends Application {
 
   //  static final String HOST = "empresa";
     static final int PUERTO=5000;
@@ -45,10 +50,19 @@ public class Empresa {
     
     }
     
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("V3_FXML.fxml"));        
+        Scene scene = new Scene(root);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        launch();
         new Empresa();
     }
     

@@ -52,10 +52,6 @@ public class V1_FXMLController implements Initializable {
         
         //  actualizarPrecios();
     }
-
-
-    
-    
     
     @FXML
     private void clickAceptarMonto(ActionEvent event) {
@@ -119,9 +115,9 @@ public class V1_FXMLController implements Initializable {
     }
     
     @FXML
-    private void actualizarTotal(int valor)
+    private void actualizarTotal(int valor) throws InterruptedException
     {
-        if (this.esLitros) {
+        if (this.esLitros) {           
             this.precioPantalla.setText(String.valueOf(this.cantidad * valor));
         }
         else
@@ -132,6 +128,6 @@ public class V1_FXMLController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        this.actualizarPrecios();
     }        
 }
