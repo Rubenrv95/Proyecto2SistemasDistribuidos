@@ -49,8 +49,11 @@ public class V1_FXMLController implements Initializable {
     private int cantidad = 0;
 
     public V1_FXMLController() {
-        this.ingresoMonto = new TextField();
+        
+        //  actualizarPrecios();
     }
+
+
     
     
     
@@ -66,37 +69,69 @@ public class V1_FXMLController implements Initializable {
     
     @FXML
     private void clickAceptarLitros(ActionEvent event) {
-        this.cantidad = Integer.parseInt(this.ingresoLitro.getText());
-        this.esLitros = true;
+        System.out.println(ingresoLitro.getText());
+        String a = ingresoLitro.getText();
+        this.cantidad = Integer.parseInt(a);
+        this.esLitros = false;
+        String b = String.valueOf(this.cantidad);
+        this.litrosPantalla.setText(b);
     }
 
     @FXML
     private void clickBencina93(ActionEvent event) throws InterruptedException {
+        this.actualizarTotal(Integer.parseInt(this.precioBencina93.getText()));
         Surtidor.generarCarga(this.cantidad, this.esLitros, "1");
     }
     
     @FXML
     private void clickBencina95(ActionEvent event) throws InterruptedException {
+        this.actualizarTotal(Integer.parseInt(this.precioBencina95.getText()));
         Surtidor.generarCarga(this.cantidad, this.esLitros, "2");
     }   
     
     @FXML
     private void clickBencina97(ActionEvent event) throws InterruptedException {
+        this.actualizarTotal(Integer.parseInt(this.precioBencina97.getText()));
         Surtidor.generarCarga(this.cantidad, this.esLitros, "3");
     }
     
     @FXML
     private void clickDiesel(ActionEvent event) throws InterruptedException {
+        this.actualizarTotal(Integer.parseInt(this.precioDiesel.getText()));        
         Surtidor.generarCarga(this.cantidad, this.esLitros, "4");
     }
     
     @FXML
     private void clickKerosene(ActionEvent event) throws InterruptedException {
+        this.actualizarTotal(Integer.parseInt(this.precioKerosene.getText()));
         Surtidor.generarCarga(this.cantidad, this.esLitros, "5");
     }     
     
+    @FXML
+    private void actualizarPrecios()
+    {
+        precioBencina93.setText(Integer.toString(Surtidor.getValor93()));
+        precioBencina95.setText(Integer.toString(Surtidor.getValor95()));
+        precioBencina97.setText(Integer.toString(Surtidor.getValor97()));
+        precioDiesel.setText(Integer.toString(Surtidor.getValorDiesel()));
+        precioKerosene.setText(Integer.toString(Surtidor.getValorKerosene()));
+        
+    }
+    
+    @FXML
+    private void actualizarTotal(int valor)
+    {
+        if (this.esLitros) {
+            this.precioPantalla.setText(String.valueOf(this.cantidad * valor));
+        }
+        else
+        {
+            this.litrosPantalla.setText(String.valueOf(this.cantidad/valor));
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
     }        
 }

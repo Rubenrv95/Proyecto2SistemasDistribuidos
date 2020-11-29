@@ -48,7 +48,7 @@
                   </Text>
                </children>
             </AnchorPane>
-              <Button fx:id="aceptarLitro" layoutX="106.0" layoutY="105.0" onAction="#clickAceptarLitros" text="Carga x Litro" />
+              <Button fx:id="aceptarLitro" layoutX="106.0" layoutY="105.0" onAction="#clickAceptarLitros" onMouseClicked="#actualizarPrecios" text="Carga x Litro" />
               <Label fx:id="label" layoutX="357.0" layoutY="100.0" minHeight="16" minWidth="69" />
             <ImageView fitHeight="253.0" fitWidth="610.0" layoutY="135.0">
                <image>
@@ -56,9 +56,9 @@
                </image>
 
             </ImageView>
-            <Button fx:id="aceptarMonto" layoutX="422.0" layoutY="79.0" onAction="#clickAceptarMonto" text="Carga x Monto" />
-            <TextField fx:id="ingresoMonto" layoutX="206.0" layoutY="78.0" prefHeight="25.0" prefWidth="198.0" promptText="123" />
-            <TextField fx:id="ingresoLitro" layoutX="206.0" layoutY="106.0" prefHeight="25.0" prefWidth="198.0" />
+            <Button fx:id="aceptarMonto" layoutX="422.0" layoutY="79.0" onAction="#clickAceptarMonto" onMouseClicked="#actualizarPrecios" text="Carga x Monto" />
+            <TextField fx:id="ingresoMonto" layoutX="206.0" layoutY="78.0" onAction="#actualizarPrecios" onInputMethodTextChanged="#actualizarPrecios" onMouseClicked="#actualizarPrecios" prefHeight="25.0" prefWidth="198.0" />
+            <TextField fx:id="ingresoLitro" layoutX="206.0" layoutY="106.0" onAction="#actualizarPrecios" onDragDetected="#actualizarPrecios" onInputMethodTextChanged="#actualizarPrecios" onMouseClicked="#actualizarPrecios" prefHeight="25.0" prefWidth="198.0" />
             <Text layoutX="14.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diesel" wrappingWidth="83.00000131130219">
                <font>
                   <Font name="System Bold" size="29.0" />

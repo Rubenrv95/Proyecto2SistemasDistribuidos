@@ -128,6 +128,49 @@ public class Surtidor extends Application{
         launch();
     }
 
+    public static int getValor93() {
+        return valor93;
+    }
+
+    public static void setValor93(int valor93) {
+        Surtidor.valor93 = valor93;
+    }
+
+    public static int getValor95() {
+        return valor95;
+    }
+
+    public static void setValor95(int valor95) {
+        Surtidor.valor95 = valor95;
+    }
+
+    public static int getValor97() {
+        return valor97;
+    }
+
+    public static void setValor97(int valor97) {
+        Surtidor.valor97 = valor97;
+    }
+
+    public static int getValorDiesel() {
+        return valorDiesel;
+    }
+
+    public static void setValorDiesel(int valorDiesel) {
+        Surtidor.valorDiesel = valorDiesel;
+    }
+
+    public static int getValorKerosene() {
+        return valorKerosene;
+    }
+
+    public static void setValorKerosene(int valorKerosene) {
+        Surtidor.valorKerosene = valorKerosene;
+    }
+    
+    
+    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
