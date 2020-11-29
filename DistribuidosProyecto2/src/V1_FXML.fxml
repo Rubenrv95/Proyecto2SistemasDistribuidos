@@ -1,14 +1,180 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V1_FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V1_FXMLController">
     <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+      <AnchorPane layoutX="15.0" layoutY="14.0" prefHeight="383.0" prefWidth="610.0">
+         <children>
+            <AnchorPane layoutX="136.0" prefHeight="69.0" prefWidth="339.0" style="-fx-background-color: white;">
+               <effect>
+                  <InnerShadow choke="0.25" color="#00d134cb" height="126.08" radius="57.707499999999996" width="106.75">
+                     <input>
+                        <DropShadow />
+                     </input>
+                  </InnerShadow>
+               </effect>
+               <children>
+                  <Text layoutX="263.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Litros">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="263.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="litrosPantalla" layoutX="131.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="RIGHT" wrappingWidth="123.99999782443047">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="precioPantalla" layoutX="131.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="RIGHT" wrappingWidth="123.99999782443047">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+              <Button fx:id="aceptarLitro" layoutX="106.0" layoutY="105.0" onAction="#clickAceptarLitros" onMouseClicked="#actualizarPrecios" text="Carga x Litro" />
+              <Label fx:id="label" layoutX="357.0" layoutY="100.0" minHeight="16" minWidth="69" />
+            <ImageView fitHeight="253.0" fitWidth="610.0" layoutY="135.0">
+               <image>
+                  <Image url="@../pump.png" />
+               </image>
+
+            </ImageView>
+            <Button fx:id="aceptarMonto" layoutX="422.0" layoutY="79.0" onAction="#clickAceptarMonto" onMouseClicked="#actualizarPrecios" text="Carga x Monto" />
+            <TextField fx:id="ingresoMonto" layoutX="206.0" layoutY="78.0" onAction="#actualizarPrecios" onInputMethodTextChanged="#actualizarPrecios" onMouseClicked="#actualizarPrecios" prefHeight="25.0" prefWidth="198.0" />
+            <TextField fx:id="ingresoLitro" layoutX="206.0" layoutY="106.0" onAction="#actualizarPrecios" onDragDetected="#actualizarPrecios" onInputMethodTextChanged="#actualizarPrecios" onMouseClicked="#actualizarPrecios" prefHeight="25.0" prefWidth="198.0" />
+            <Text layoutX="14.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diesel" wrappingWidth="83.00000131130219">
+               <font>
+                  <Font name="System Bold" size="29.0" />
+               </font>
+            </Text>
+            <Text fill="#fffb00" layoutX="114.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kerosene" wrappingWidth="124.00000131130219">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+               <effect>
+                  <DropShadow height="2.97" radius="0.245" width="0.01" />
+               </effect>
+            </Text>
+            <Text fill="#fffb00" layoutX="35.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diesel" wrappingWidth="124.00000131130219">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+               <effect>
+                  <DropShadow height="2.97" radius="0.245" width="0.01" />
+               </effect>
+            </Text>
+            <Text fill="#fffb00" layoutX="114.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shell" wrappingWidth="124.00000131130219">
+               <font>
+                  <Font name="System Bold" size="8.0" />
+               </font>
+            </Text>
+            <Text fill="#fffb00" layoutX="35.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shell" wrappingWidth="124.00000131130219">
+               <font>
+                  <Font name="System Bold" size="8.0" />
+               </font>
+               <effect>
+                  <DropShadow height="2.97" radius="0.245" width="0.01" />
+               </effect>
+            </Text>
+            <Text layoutX="139.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="K" wrappingWidth="36.000001311302185">
+               <font>
+                  <Font name="System Bold" size="52.0" />
+               </font>
+            </Text>
+            <Text layoutX="277.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="93" wrappingWidth="68.9999980777502">
+               <font>
+                  <Font name="System Bold" size="52.0" />
+               </font>
+            </Text>
+            <Text layoutX="381.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="95" wrappingWidth="68.9999980777502">
+               <font>
+                  <Font name="System Bold" size="52.0" />
+               </font>
+            </Text>
+            <Text layoutX="487.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="97" wrappingWidth="68.9999980777502">
+               <font>
+                  <Font name="System Bold" size="52.0" />
+               </font>
+            </Text>
+            <Button fx:id="diesel" layoutX="13.0" layoutY="296.0" mnemonicParsing="false" onAction="#clickDiesel" opacity="0.41" prefHeight="85.0" prefWidth="83.0">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Button>
+            <Button fx:id="kerosene" layoutX="111.0" layoutY="296.0" mnemonicParsing="false" onAction="#clickKerosene" opacity="0.41" prefHeight="85.0" prefWidth="83.0">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Button>
+            <Button fx:id="bencina93" layoutX="259.0" layoutY="294.0" mnemonicParsing="false" onAction="#clickBencina93" opacity="0.41" prefHeight="85.0" prefWidth="95.0">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Button>
+            <Button fx:id="bencina95" layoutX="364.0" layoutY="294.0" mnemonicParsing="false" onAction="#clickBencina95" opacity="0.41" prefHeight="85.0" prefWidth="95.0">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Button>
+            <Button fx:id="bencina97" layoutX="469.0" layoutY="294.0" mnemonicParsing="false" onAction="#clickBencina97" opacity="0.41" prefHeight="85.0" prefWidth="95.0">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Button>
+            <Text fx:id="precioDiesel" fill="#00000091" layoutX="30.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" textAlignment="RIGHT" wrappingWidth="68.9999980777502">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fx:id="precioKerosene" fill="#00000091" layoutX="124.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" textAlignment="RIGHT" wrappingWidth="68.9999980777502">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fx:id="precioBencina93" fill="#00000091" layoutX="270.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" textAlignment="RIGHT" wrappingWidth="68.9999980777502">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fx:id="precioBencina95" fill="#00000091" layoutX="370.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" textAlignment="RIGHT" wrappingWidth="68.9999980777502">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+            <Text fx:id="precioBencina97" fill="#00000091" layoutX="469.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" textAlignment="RIGHT" wrappingWidth="68.9999980777502">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
     </children>
+   <effect>
+      <InnerShadow choke="0.09" color="#000000dd" radius="53.7375" width="195.95">
+         <input>
+            <Blend>
+               <topInput>
+                  <DropShadow />
+               </topInput>
+            </Blend>
+         </input>
+      </InnerShadow>
+   </effect>
 </AnchorPane>

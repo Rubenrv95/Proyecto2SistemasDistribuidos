@@ -7,6 +7,11 @@ import java.io.InputStreamReader;
 import static java.lang.Thread.sleep;
 import java.net.Socket;
 import java.sql.SQLException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,23 +23,23 @@ import java.sql.SQLException;
  *
  * @author Luciano
  */
-public class Surtidor {
+public class Surtidor extends Application{
     
-    public String nombre;
+    public static String nombre;
     static final String HOST = "localhost";
     static final int PUERTO = 5001;
-    public boolean ocupado = false;
-    public int valor93;
-    public int valor95;
-    public int valor97;
-    public int valorDiesel;
-    public int valorKerosene;
+    public static boolean ocupado = false;
+    public static int valor93=123;
+    public static int valor95=234;
+    public static int valor97=345;
+    public static int valorDiesel=546;
+    public static int valorKerosene=567;
     
     login l = new login();
     
     public Surtidor() throws InterruptedException{
         
-        generarCarga(1, true, "Bencina");
+        
         
     }
     
@@ -70,31 +75,30 @@ public class Surtidor {
         this.valorKerosene=l.obtenerPrecio("valorKerosene");;//preguntar a base de datos
     }
     
-    public void generarCarga(int cantidad, boolean litros, String tipo) throws InterruptedException
+    public static void generarCarga(int cantidad, boolean litros, String tipo) throws InterruptedException
     {
-        int valorActual=0; //= consulta bd;
+        int  valorActual=0; //= consulta bd;
         switch (tipo)
         {
             case "1":   //93
                 valorActual=this.valor93; //= consulta bd;
-                
                 break;
             case "2":   //95
-                valorActual=this.valor95; //= consulta bd;
+                valorActual=Surtidor.valor95; //= consulta bd;
                 break;
             case "3":   //97
-                valorActual=this.valor97; //= consulta bd;
+                valorActual=Surtidor.valor97; //= consulta bd;
                 break;
             case "4":   //Diesel
-                valorActual=this.valorDiesel; //= consulta bd;
+                valorActual=Surtidor.valorDiesel; //= consulta bd;
                 break;
             case "5":   //Kerosene
-                valorActual=this.valorKerosene; //= consulta bd;
+                valorActual=Surtidor.valorKerosene; //= consulta bd;
                 break;
                     
         }        
         
-        this.ocupado=true;
+        Surtidor.ocupado=true;
         if (litros) {
             sleep(cantidad);
         }
@@ -103,14 +107,14 @@ public class Surtidor {
             sleep(cantidad);
         }
         int total=cantidad*valorActual;
-        this.ocupado=false;
+        Surtidor.ocupado=false;
         try{
             Socket skCliente = new Socket(HOST, PUERTO);
             InputStream aux = skCliente.getInputStream();
             DataInputStream flujo = new DataInputStream( aux );
             DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
             
-            String mensaje = "generarCarga"+" "+cantidad+" "+litros+" "+nombre+" "+total; //Instruccion + litros de carga + nombre surtidor
+            String mensaje = "generarCarga"+" "+cantidad+" "+litros+" "+ Surtidor.nombre +" "+total; //Instruccion + litros de carga + nombre surtidor
 
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
@@ -123,7 +127,61 @@ public class Surtidor {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException {
-        new Surtidor();
+        
+        launch();
+    }
+
+    public static int getValor93() {
+        return valor93;
+    }
+
+    public static void setValor93(int valor93) {
+        Surtidor.valor93 = valor93;
+    }
+
+    public static int getValor95() {
+        return valor95;
+    }
+
+    public static void setValor95(int valor95) {
+        Surtidor.valor95 = valor95;
+    }
+
+    public static int getValor97() {
+        return valor97;
+    }
+
+    public static void setValor97(int valor97) {
+        Surtidor.valor97 = valor97;
+    }
+
+    public static int getValorDiesel() {
+        return valorDiesel;
+    }
+
+    public static void setValorDiesel(int valorDiesel) {
+        Surtidor.valorDiesel = valorDiesel;
+    }
+
+    public static int getValorKerosene() {
+        return valorKerosene;
+    }
+
+    public static void setValorKerosene(int valorKerosene) {
+        Surtidor.valorKerosene = valorKerosene;
+    }
+    
+    
+    
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
+        
+        Scene scene = new Scene(root);
+        
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
     
 }
