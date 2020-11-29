@@ -6,6 +6,8 @@ import java.io.DataOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,6 +23,7 @@ public class ServicentroCliente extends Thread{
     static final int PUERTOclt = 5001;
     static final String HOSTsrv = "192.168.1.126";  
     public String nombre;
+    login l = new login();
 
     public ServicentroCliente(String nombre) {
         this.nombre = nombre;
@@ -55,17 +58,25 @@ public class ServicentroCliente extends Thread{
         }      
     }
     
-        public void identificadorInstruccion(String[] mensaje)
+        public void identificadorInstruccion(String[] mensaje) throws SQLException
     {
         switch (mensaje[0])
         {
             case "generarCarga":
                 //Guardar info en BDD, mensaje[1] litros, mensaje[3] tipo combustible, mensaje[4] Monto a pagar 
+                
                 break;
                 
             case "actualizarPrecios":
+                l.actualizarPreciosEnBDD(mensaje);
                 //Guardar info en BDD, mensaje[1] 93, mensaje[2] 95, mensaje[3] 97, mensaje[4] Diesel, mensaje[5] kerosene
                 break;
+                
+            case "crearSurtidor":
+                
+                break;
         }
+        
+        
     }
 }

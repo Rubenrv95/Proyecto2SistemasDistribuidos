@@ -29,11 +29,11 @@ public class Surtidor extends Application{
     static final String HOST = "localhost";
     static final int PUERTO = 5001;
     public static boolean ocupado = false;
-    public static int valor93=123;
-    public static int valor95=234;
-    public static int valor97=345;
-    public static int valorDiesel=546;
-    public static int valorKerosene=567;
+    public static int valor93;
+    public static int valor95;
+    public static int valor97;
+    public static int valorDiesel;
+    public static int valorKerosene;
     
     login l = new login();
     
@@ -68,11 +68,11 @@ public class Surtidor extends Application{
     
     public void actualizarPrecios() throws SQLException
     {
-        this.valor93= l.obtenerPrecio("valor93");;//preguntar a base de datos
-        this.valor95= l.obtenerPrecio("valor95");;//preguntar a base de datos
-        this.valor97= l.obtenerPrecio("valor97");;//preguntar a base de datos
-        this.valorDiesel=l.obtenerPrecio("valorDiesel");;//preguntar a base de datos  
-        this.valorKerosene=l.obtenerPrecio("valorKerosene");;//preguntar a base de datos
+        this.valor93= l.obtenerPrecio("valor93");
+        this.valor95= l.obtenerPrecio("valor95");
+        this.valor97= l.obtenerPrecio("valor97");
+        this.valorDiesel=l.obtenerPrecio("valorDiesel"); 
+        this.valorKerosene=l.obtenerPrecio("valorKerosene");
     }
     
     public static void generarCarga(int cantidad, boolean litros, String tipo) throws InterruptedException
@@ -81,19 +81,19 @@ public class Surtidor extends Application{
         switch (tipo)
         {
             case "1":   //93
-                valorActual=this.valor93; //= consulta bd;
+                valorActual=Surtidor.valor93; 
                 break;
             case "2":   //95
-                valorActual=Surtidor.valor95; //= consulta bd;
+                valorActual=Surtidor.valor95; 
                 break;
             case "3":   //97
-                valorActual=Surtidor.valor97; //= consulta bd;
+                valorActual=Surtidor.valor97; 
                 break;
             case "4":   //Diesel
-                valorActual=Surtidor.valorDiesel; //= consulta bd;
+                valorActual=Surtidor.valorDiesel; 
                 break;
             case "5":   //Kerosene
-                valorActual=Surtidor.valorKerosene; //= consulta bd;
+                valorActual=Surtidor.valorKerosene;
                 break;
                     
         }        
@@ -123,6 +123,25 @@ public class Surtidor extends Application{
             System.out.println( e.getMessage() );
         }
     }
+    
+        public void crearEnBD(String mensje)
+    {     
+        try{
+            Socket skCliente = new Socket(HOST, PUERTO);
+            InputStream aux = skCliente.getInputStream();
+            DataInputStream flujo = new DataInputStream( aux );
+            DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
+            
+            String mensaje = "crearSurtidor"+" "+this.nombre; //Instruccion + litros de carga + nombre surtidor
+
+            dOut.writeUTF(mensaje);
+            System.out.println( flujo.readUTF() );
+            skCliente.close();
+        } catch(Exception e ) {
+            System.out.println( e.getMessage() );
+        }
+    }
+        
     /**
      * @param args the command line arguments
      */
@@ -170,12 +189,12 @@ public class Surtidor extends Application{
     public static void setValorKerosene(int valorKerosene) {
         Surtidor.valorKerosene = valorKerosene;
     }
-    
-    
+
     
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        actualizarPrecios();
         Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
         
         Scene scene = new Scene(root);
