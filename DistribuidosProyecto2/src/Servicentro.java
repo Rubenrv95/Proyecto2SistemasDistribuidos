@@ -68,10 +68,9 @@ public class Servicentro extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("V2_FXML.fxml"));
-        
-        Scene scene = new Scene(root);
-        
+        Parent root = FXMLLoader.load(getClass().getResource("V2_FXML.fxml"));        
+        Scene scene = new Scene(root);       
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

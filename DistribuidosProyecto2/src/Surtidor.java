@@ -173,10 +173,9 @@ public class Surtidor extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));        
         Scene scene = new Scene(root);
-        
+        primaryStage.setResizable(false);        
         primaryStage.setScene(scene);
         primaryStage.show();
     }
