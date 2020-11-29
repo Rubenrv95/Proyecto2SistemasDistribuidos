@@ -73,7 +73,8 @@ public class ServicentroCliente extends Thread{
                 break;
                 
             case "crearSurtidor":
-                
+                mensaje[2] = this.nombre;
+                l.crearSurtidor(mensaje);
                 break;
         }
         

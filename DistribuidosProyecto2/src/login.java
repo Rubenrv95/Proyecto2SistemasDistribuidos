@@ -76,6 +76,44 @@ public class login {
         ////Guardar info en BDD, mensaje[1] 93, mensaje[2] 95, mensaje[3] 97, mensaje[4] Diesel, mensaje[5] kerosene
     }
 
+    void crearSurtidor(String[] mensaje) throws SQLException {
+        stmt = con.createStatement();
+        rs = stmt.executeQuery("INSERT surtidor VALUES ('"+mensaje[1]+"', 0, '"+mensaje[2]+"');");
+        
+        /*
+            INSERT INTO surtidor
+            VALUES ('"+mensaje[1]+"', "+mensaje[2]+")
+            WHERE NOT EXISTS ( SELECT * FROM surtidor 
+                   WHERE '"+mensaje[1]+"' = '"+mensaje[1]+"'
+                   AND '"+mensaje[2]+"' = '"+mensaje[2]+"';
+        
+            INSERT INTO surtidor
+            VALUES ('1', 0 ,'Estacion Curico')
+            WHERE NOT EXISTS ( SELECT * FROM surtidor 
+                   WHERE ID = '1'
+                   AND refSucursal = 'Estacion Curico');
+        
+        
+                IF NOT EXISTS (SELECT * FROM surtidor 
+                    WHERE ID = '1'
+                    AND refSucursal = 'Estacion Curico'
+                BEGIN
+                    INSERT INTO EmailsRecebidos (De, Assunto, Data)
+                    VALUES (@_DE, @_ASSUNTO, @_DATA);
+        
+        INSERT INTO surtidor (ID, monto_recaudado, refSucursal)
+        SELECT 23, DATE('2013-02-12'), 22.5
+            FROM dual
+            WHERE NOT EXISTS (SELECT 1 
+                FROM funds 
+                WHERE ID = 23
+                AND date = DATE('2013-02-12'));
+        
+        
+        */
+
+    }
+
 
     
 }
