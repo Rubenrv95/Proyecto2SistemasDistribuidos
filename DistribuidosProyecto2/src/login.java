@@ -51,12 +51,31 @@ public class login {
     
     public int obtenerPrecio(String v) throws SQLException {
         stmt = con.createStatement();
-        rs = stmt.executeQuery("SELECT " + v + " FROM sucursal");
+        rs = stmt.executeQuery("SELECT " +v+ " FROM sucursal WHERE nombre = 'Estacion Curico';");
         
-        int valor = rs.getInt(v);
+        String foundType="";
+        int valor = -1;
+        if(rs.next()){               
+            foundType = rs.getString(v);
+            valor = Integer.parseInt(foundType);
+            System.out.println("valor "+v+" : "+foundType);
+        }
+        else
+            System.out.println("Consulta no obtenida");
+        
         
         return valor;
         
     }
+    
+    public void actualizarPreciosEnBDD(String[] mensaje) throws SQLException
+    {
+        stmt = con.createStatement();
+        rs = stmt.executeQuery("UPDATE sucursal SET valor93 = "+mensaje[1]+", valor95 = "+mensaje[2]+", valor97 = "+mensaje[3]+", valorDiesel="+mensaje[4]+", valorKerosene="+mensaje[5]);
+        
+        ////Guardar info en BDD, mensaje[1] 93, mensaje[2] 95, mensaje[3] 97, mensaje[4] Diesel, mensaje[5] kerosene
+    }
+
+
     
 }
