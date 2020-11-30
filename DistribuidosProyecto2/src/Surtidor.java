@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -197,7 +198,7 @@ public class Surtidor extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         actualizarPrecios();
-        Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("V1_1_FXML.fxml"));
         
         Scene scene = new Scene(root);
         primaryStage.setResizable(false);        

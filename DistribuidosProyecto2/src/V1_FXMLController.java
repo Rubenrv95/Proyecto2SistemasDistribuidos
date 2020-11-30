@@ -53,6 +53,8 @@ public class V1_FXMLController implements Initializable {
         //  actualizarPrecios();
     }
     
+    
+    
     @FXML
     private void clickAceptarMonto(ActionEvent event) {
         System.out.println(ingresoMonto.getText());

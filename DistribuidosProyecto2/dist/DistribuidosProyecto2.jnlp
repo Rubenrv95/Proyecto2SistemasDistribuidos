@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="DistribuidosProyecto2.jar" size="506984" download="eager" />
+=======
+    <jar href="DistribuidosProyecto2.jar" size="514028" download="eager" />
+>>>>>>> Pino
     <jar href="lib\mysql-connector-java-8.0.22.jar" size="2389216" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="DistribuidosProyecto2" >
