@@ -116,7 +116,7 @@ public class Surtidor extends Application{
             DataInputStream flujo = new DataInputStream( aux );
             DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
             
-            String mensaje = "generarCarga"+" "+cantidad+" "+litros+" "+ Surtidor.nombre +" "+total; //Instruccion + litros de carga + nombre surtidor
+            String mensaje = "generarCarga"+" "+cantidad+" "+ Surtidor.nombre +" "+total; //Instruccion + litros de carga + nombre surtidor
 
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );

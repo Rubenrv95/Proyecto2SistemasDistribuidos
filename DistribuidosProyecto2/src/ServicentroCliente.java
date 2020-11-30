@@ -52,7 +52,7 @@ public class ServicentroCliente extends Thread{
                
                 flujo.writeUTF( "consulta recibida: "+mensaje);
                 skCliente.close();
-                 identificadorInstruccion(mensaje.split(" "));
+                
         }
         System.out.println("Demasiados clientes por hoy");
         } catch( Exception e ) {
@@ -65,7 +65,17 @@ public class ServicentroCliente extends Thread{
         switch (mensaje[0])
         {
             case "generarCarga":
-                //Guardar info en BDD, mensaje[1] litros, mensaje[3] tipo combustible, mensaje[4] Monto a pagar 
+                
+                String[] destiny = new String[5];
+                destiny[0] = mensaje[0];
+                destiny[1] = mensaje[1];
+                destiny[2] = mensaje[2];
+                destiny[3] = mensaje[3];
+                destiny[4] = this.nombre;
+                
+                l.generarCarga(destiny);
+                
+                //Guardar info en BDD, mensaje[1] cantidadLitros, mensaje[2] nombreSurtidor, mensaje[3] Monto a pagar, mensaje [4] nobmreServicentro
                 
                 break;
                 
@@ -80,7 +90,6 @@ public class ServicentroCliente extends Thread{
                 destino[0] = mensaje[0];
                 destino[1] = mensaje[1];
                 destino[2] = this.nombre;
-                System.out.println("asd");
                 l.crearSurtidor(destino);
                 break;
         }      
