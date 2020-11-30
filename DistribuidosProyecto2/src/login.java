@@ -108,17 +108,39 @@ public class login {
         
     }
 
-    void generarCarga(String[] mensaje) throws SQLException {
+    public void generarCarga(String[] mensaje) throws SQLException {
         stmt = con.createStatement();
-        rs = stmt.executeQuery("SELECT * FROM surtidor WHERE surtidor.id = "+ mensaje[2] + ";");
+             
+        rs = stmt.executeQuery("SELECT * FROM surtidor WHERE refSucursal = '" + mensaje[4] + "';");
         
-        double monto_surtidor = rs.getDouble("monto_recaudado");
+        double monto_surtidor =0;
+        while (rs.next()) {
+            if (rs.getInt("ID") == Integer.parseInt(mensaje[2])) {
+                monto_surtidor = rs.getDouble("monto_recaudado");
+                break;
+            }
+        }
         
-        rs = stmt.executeQuery("SELECT * FROM sucursal WHERE sucursal.nombre = '"+ mensaje[4] + "' ;");
+        monto_surtidor += Integer.parseInt(mensaje[3]);
         
-        double monto_sucursal = rs.getDouble("monto_recaudado");
+        stmt.executeUpdate("UPDATE surtidor SET monto_recaudado = " + monto_surtidor + " WHERE surtidor.ID = " + mensaje[2] + " AND refSucursal = '" + mensaje[4] + "';");
         
-        double total = monto_sucursal + monto_surtidor;
+        System.out.println("Monto del surtidor: " + monto_surtidor);
+        
+        rs = stmt.executeQuery("SELECT * FROM sucursal WHERE nombre = '" + mensaje[4] + "';");
+        
+        double monto_sucursal = 0;
+        while (rs.next()) {
+            monto_sucursal = rs.getDouble("monto_recaudado");
+            break;
+        }
+        
+        System.out.println("Monto de sucursal: " + monto_sucursal);
+
+        
+        double total = monto_surtidor + monto_sucursal;
+        System.out.println(total);
+        
         
         stmt.executeUpdate("UPDATE sucursal SET monto_recaudado = " + total + " WHERE sucursal.nombre = '" + mensaje[4] + "';");
         
