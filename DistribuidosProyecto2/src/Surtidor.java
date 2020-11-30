@@ -39,9 +39,11 @@ public class Surtidor extends Application{
     
     public Surtidor() throws InterruptedException{
         
-        
+        crearEnBD();
         
     }
+    
+    
     
     public void conectar(){
         
@@ -56,7 +58,7 @@ public class Surtidor extends Application{
           //  launch();
             //this.start(stage);
             System.out.print("Eliga una operación: ");
-            String mensaje = reader.readLine();
+            String mensaje = "asd";
 
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
@@ -124,16 +126,16 @@ public class Surtidor extends Application{
         }
     }
     
-        public void crearEnBD(String mensje)
-    {     
+        public void crearEnBD()
+    {           
         try{
             Socket skCliente = new Socket(HOST, PUERTO);
             InputStream aux = skCliente.getInputStream();
             DataInputStream flujo = new DataInputStream( aux );
             DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
-            
-            String mensaje = "crearSurtidor"+" "+this.nombre; //Instruccion + litros de carga + nombre surtidor
 
+            String mensaje = "crearSurtidor"+" "+this.nombre; 
+            
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
             skCliente.close();

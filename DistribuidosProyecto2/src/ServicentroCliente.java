@@ -25,8 +25,9 @@ public class ServicentroCliente extends Thread{
     public String nombre;
     login l = new login();
 
-    public ServicentroCliente(String nombre) {
+    public ServicentroCliente(String nombre) throws SQLException {       
         this.nombre = nombre;
+         l.crearServicentro(nombre);
     }
     
 
@@ -48,9 +49,10 @@ public class ServicentroCliente extends Thread{
                 DataOutputStream flujo= new DataOutputStream( aux );
                 DataInputStream dIn = new DataInputStream(skCliente.getInputStream());
                 String mensaje = dIn.readUTF();
-                identificadorInstruccion(mensaje.split(" "));
+               
                 flujo.writeUTF( "consulta recibida: "+mensaje);
                 skCliente.close();
+                 identificadorInstruccion(mensaje.split(" "));
         }
         System.out.println("Demasiados clientes por hoy");
         } catch( Exception e ) {
@@ -73,8 +75,13 @@ public class ServicentroCliente extends Thread{
                 break;
                 
             case "crearSurtidor":
-                mensaje[2] = this.nombre;
-                l.crearSurtidor(mensaje);
+                
+                String[] destino = new String[3];
+                destino[0] = mensaje[0];
+                destino[1] = mensaje[1];
+                destino[2] = this.nombre;
+                System.out.println("asd");
+                l.crearSurtidor(destino);
                 break;
         }      
     }
