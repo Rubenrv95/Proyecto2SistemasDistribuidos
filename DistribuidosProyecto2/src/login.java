@@ -75,7 +75,11 @@ public class login {
         
         ////Guardar info en BDD, mensaje[1] 93, mensaje[2] 95, mensaje[3] 97, mensaje[4] Diesel, mensaje[5] kerosene
     }
-
-
+    
+    public void crearServicentro(String nombre) throws SQLException {
+        stmt = con.createStatement();
+        rs = stmt.executeQuery("INSERT INTO sucursal VALUES ('" + nombre + "');" );
+        
+    }
     
 }
