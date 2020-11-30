@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="309.0" prefWidth="658.0" style="-fx-border-radius: 50px; -fx-background-color: GhostWhite;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V3_FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="309.0" prefWidth="658.0" style="-fx-border-radius: 50px; -fx-background-color: GhostWhite;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V3_FXMLController">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="88.0" layoutX="-2.0" layoutY="151.0" stroke="#00000001" strokeType="INSIDE" width="112.0">
          <fill>
@@ -164,7 +164,7 @@
                </children>
             </AnchorPane>
             <Button fx:id="botonDiesel" layoutX="25.0" layoutY="89.0" onAction="#actualizarDiesel" text="Actualizar" />
-            <TextField fx:id="precioProveedor4" layoutX="17.0" layoutY="23.0" prefHeight="25.0" prefWidth="68.0" />
+            <TextField fx:id="precioProveedor4" layoutX="17.0" layoutY="23.0" prefHeight="25.0" prefWidth="68.0" promptText="0" text="0" />
             <Text layoutX="240.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="93" wrappingWidth="68.9999980777502">
                <font>
                   <Font name="System Bold" size="52.0" />
@@ -196,10 +196,10 @@
             <TextField fx:id="precioFinal1" disable="true" layoutX="241.0" layoutY="55.0" prefHeight="25.0" prefWidth="69.0" />
             <TextField fx:id="precioFinal2" disable="true" layoutX="347.0" layoutY="56.0" prefHeight="25.0" prefWidth="69.0" />
             <TextField fx:id="precioFinal3" disable="true" layoutX="450.0" layoutY="57.0" prefHeight="25.0" prefWidth="69.0" />
-            <TextField fx:id="precioProveedor1" layoutX="227.0" layoutY="25.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioProveedor5" layoutX="125.0" layoutY="23.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioProveedor2" layoutX="333.0" layoutY="26.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioProveedor3" layoutX="436.0" layoutY="27.0" prefHeight="25.0" prefWidth="68.0" />
+            <TextField fx:id="precioProveedor1" layoutX="227.0" layoutY="25.0" prefHeight="25.0" prefWidth="68.0" text="0" />
+            <TextField fx:id="precioProveedor5" layoutX="125.0" layoutY="23.0" prefHeight="25.0" prefWidth="68.0" text="0" />
+            <TextField fx:id="precioProveedor2" layoutX="333.0" layoutY="26.0" prefHeight="25.0" prefWidth="68.0" text="0" />
+            <TextField fx:id="precioProveedor3" layoutX="436.0" layoutY="27.0" prefHeight="25.0" prefWidth="68.0" text="0" />
             <Text layoutX="334.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
                <font>
                   <Font name="System Bold" size="18.0" />
