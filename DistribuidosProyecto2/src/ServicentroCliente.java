@@ -52,6 +52,7 @@ public class ServicentroCliente extends Thread{
                
                 flujo.writeUTF( "consulta recibida: "+mensaje);
                 skCliente.close();
+                identificadorInstruccion(mensaje.split(" "));
                 
         }
         System.out.println("Demasiados clientes por hoy");

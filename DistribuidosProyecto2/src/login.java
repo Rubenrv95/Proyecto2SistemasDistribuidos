@@ -107,8 +107,23 @@ public class login {
         
     }
 
-    void generarCarga(String[] destiny) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void generarCarga(String[] mensaje) throws SQLException {
+        stmt = con.createStatement();
+        rs = stmt.executeQuery("SELECT * FROM surtidor WHERE surtidor.id = "+ mensaje[2] + ";");
+        
+        double monto_surtidor = rs.getDouble("monto_recaudado");
+        
+        rs = stmt.executeQuery("SELECT * FROM sucursal WHERE sucursal.nombre = '"+ mensaje[4] + "' ;");
+        
+        double monto_sucursal = rs.getDouble("monto_recaudado");
+        
+        double total = monto_sucursal + monto_surtidor;
+        
+        stmt.executeUpdate("UPDATE sucursal SET monto_recaudado = " + total + " WHERE sucursal.nombre = '" + mensaje[4] + "';");
+        
+        System.out.println("Se actualizó la wea");
+        
+        
         //Guardar info en BDD, mensaje[1] cantidadLitros, mensaje[2] nombreSurtidor, mensaje[3] Monto a pagar, mensaje [4] nobmreServicentro
     }
     
