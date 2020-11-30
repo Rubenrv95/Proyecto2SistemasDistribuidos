@@ -52,6 +52,7 @@ public class ServicentroCliente extends Thread{
                
                 flujo.writeUTF( "consulta recibida: "+mensaje);
                 skCliente.close();
+                identificadorInstruccion(mensaje.split(" "));
                 
         }
         System.out.println("Demasiados clientes por hoy");
@@ -62,6 +63,7 @@ public class ServicentroCliente extends Thread{
     
         public void identificadorInstruccion(String[] mensaje) throws SQLException
     {
+        System.out.println("ads");
         switch (mensaje[0])
         {
             case "generarCarga":
@@ -80,6 +82,7 @@ public class ServicentroCliente extends Thread{
                 break;
                 
             case "actualizarPrecios":
+                System.out.println("hola");
                 l.actualizarPreciosEnBDD(mensaje);
                 //Guardar info en BDD, mensaje[1] 93, mensaje[2] 95, mensaje[3] 97, mensaje[4] Diesel, mensaje[5] kerosene
                 break;

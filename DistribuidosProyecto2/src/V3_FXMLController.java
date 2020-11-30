@@ -54,36 +54,36 @@ public class V3_FXMLController implements Initializable {
     
     @FXML
     private void actualizarBencina93(ActionEvent event) {
-        //= this.precioProveedor1.getText();
-        //= this.porentajeUtilidad1.getText();
+        Empresa.actualizarPrecios(Integer.parseInt(this.precioProveedor1.getText()), Integer.parseInt(this.precioProveedor2.getText()), Integer.parseInt(this.precioProveedor3.getText()), Integer.parseInt(this.precioProveedor4.getText()), Integer.parseInt(this.precioProveedor5.getText()));
+        this.precioFinal1= this.precioProveedor1;
         //= this.precioFinal1.getText();              
     }
     
     @FXML
     private void actualizarBencina95(ActionEvent event) {
-        //= this.precioProveedor2.getText();
-        //= this.porentajeUtilidad2.getText();
+        Empresa.actualizarPrecios(Integer.parseInt(this.precioProveedor1.getText()), Integer.parseInt(this.precioProveedor2.getText()), Integer.parseInt(this.precioProveedor3.getText()), Integer.parseInt(this.precioProveedor4.getText()), Integer.parseInt(this.precioProveedor5.getText()));
+        this.precioFinal2= this.precioProveedor1;
         //= this.precioFinal2.getText();   
     }
     
     @FXML
     private void actualizarBencina97(ActionEvent event) {
-        //= this.precioProveedor3.getText();
-        //= this.porentajeUtilidad3.getText();
+        Empresa.actualizarPrecios(Integer.parseInt(this.precioProveedor1.getText()), Integer.parseInt(this.precioProveedor2.getText()), Integer.parseInt(this.precioProveedor3.getText()), Integer.parseInt(this.precioProveedor4.getText()), Integer.parseInt(this.precioProveedor5.getText()));
+        this.precioFinal3= this.precioProveedor1;
         //= this.precioFinal3.getText();   
     }
     
     @FXML
     private void actualizarDiesel(ActionEvent event) {
-        //= this.precioProveedor4.getText();
-        //= this.porentajeUtilidad4.getText();
+        Empresa.actualizarPrecios(Integer.parseInt(this.precioProveedor1.getText()), Integer.parseInt(this.precioProveedor2.getText()), Integer.parseInt(this.precioProveedor3.getText()), Integer.parseInt(this.precioProveedor4.getText()), Integer.parseInt(this.precioProveedor5.getText()));
+        this.precioFinal4= this.precioProveedor1;
         //= this.precioFinal4.getText();   
     }
     
     @FXML
     private void actualizarKerosene(ActionEvent event) {
-        //= this.precioProveedor5.getText();
-        //= this.porentajeUtilidad5.getText();
+        Empresa.actualizarPrecios(Integer.parseInt(this.precioProveedor1.getText()), Integer.parseInt(this.precioProveedor2.getText()), Integer.parseInt(this.precioProveedor3.getText()), Integer.parseInt(this.precioProveedor4.getText()), Integer.parseInt(this.precioProveedor5.getText()));
+        this.precioFinal5= this.precioProveedor1;
         //= this.precioFinal5.getText();   
     }
     
