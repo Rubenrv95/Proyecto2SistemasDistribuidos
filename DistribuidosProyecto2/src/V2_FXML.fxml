@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="353.0" prefWidth="658.0" style="-fx-border-radius: 50px; -fx-background-color: GhostWhite;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V2_FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="353.0" prefWidth="658.0" style="-fx-border-radius: 50px; -fx-background-color: GhostWhite;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V2_FXMLController">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="119.0" layoutX="-2.0" layoutY="151.0" stroke="#00000001" strokeType="INSIDE" width="112.0">
          <fill>
@@ -171,8 +171,8 @@
                </children>
             </AnchorPane>
             <Button fx:id="botonDiesel" layoutX="24.0" layoutY="128.0" onAction="#actualizarDiesel" text="Actualizar" />
-            <TextField fx:id="porentajeUtilidad4" layoutX="17.0" layoutY="50.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioProveedor4" layoutX="17.0" layoutY="23.0" prefHeight="25.0" prefWidth="68.0" />
+            <TextField fx:id="porentajeUtilidad4" alignment="CENTER_RIGHT" layoutX="17.0" layoutY="50.0" onMouseClicked="#actualizarValores" prefHeight="25.0" prefWidth="68.0" text="50" />
+            <TextField fx:id="precioProveedor4" alignment="CENTER_RIGHT" disable="true" layoutX="17.0" layoutY="23.0" prefHeight="25.0" prefWidth="68.0" />
             <Text layoutX="18.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diesel" wrappingWidth="83.00000131130219">
                <font>
                   <Font name="System Bold" size="29.0" />
@@ -217,19 +217,19 @@
             <Button fx:id="boton93" layoutX="234.0" layoutY="130.0" onAction="#actualizarBencina93" text="Actualizar" />
             <Button fx:id="botonKerosene" layoutX="132.0" layoutY="128.0" onAction="#actualizarKerosene" text="Actualizar" />
             <Button fx:id="boton97" layoutX="445.0" layoutY="132.0" onAction="#actualizarBencina97" text="Actualizar" />
-            <TextField fx:id="precioFinal4" layoutX="31.0" layoutY="91.0" prefHeight="25.0" prefWidth="69.0" />
-            <TextField fx:id="porentajeUtilidad5" layoutX="125.0" layoutY="50.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioFinal5" layoutX="139.0" layoutY="91.0" prefHeight="25.0" prefWidth="69.0" />
-            <TextField fx:id="porentajeUtilidad1" layoutX="227.0" layoutY="52.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioFinal1" layoutX="241.0" layoutY="91.0" prefHeight="25.0" prefWidth="69.0" />
-            <TextField fx:id="porentajeUtilidad2" layoutX="333.0" layoutY="53.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioFinal2" layoutX="347.0" layoutY="92.0" prefHeight="25.0" prefWidth="69.0" />
-            <TextField fx:id="porentajeUtilidad3" layoutX="436.0" layoutY="54.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioFinal3" layoutX="450.0" layoutY="93.0" prefHeight="25.0" prefWidth="69.0" />
-            <TextField fx:id="precioProveedor1" layoutX="227.0" layoutY="25.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioProveedor5" layoutX="125.0" layoutY="23.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioProveedor2" layoutX="333.0" layoutY="26.0" prefHeight="25.0" prefWidth="68.0" />
-            <TextField fx:id="precioProveedor3" layoutX="436.0" layoutY="27.0" prefHeight="25.0" prefWidth="68.0" />
+            <TextField fx:id="precioFinal4" disable="true" layoutX="31.0" layoutY="91.0" prefHeight="25.0" prefWidth="69.0" />
+            <TextField fx:id="porentajeUtilidad5" alignment="CENTER_RIGHT" layoutX="125.0" layoutY="50.0" onMouseClicked="#actualizarValores" prefHeight="25.0" prefWidth="68.0" text="50" />
+            <TextField fx:id="precioFinal5" disable="true" layoutX="139.0" layoutY="91.0" prefHeight="25.0" prefWidth="69.0" />
+            <TextField fx:id="porentajeUtilidad1" alignment="CENTER_RIGHT" layoutX="227.0" layoutY="52.0" onMouseClicked="#actualizarValores" prefHeight="25.0" prefWidth="68.0" text="50" />
+            <TextField fx:id="precioFinal1" disable="true" layoutX="241.0" layoutY="91.0" prefHeight="25.0" prefWidth="69.0" />
+            <TextField fx:id="porentajeUtilidad2" alignment="CENTER_RIGHT" layoutX="333.0" layoutY="53.0" onMouseClicked="#actualizarValores" prefHeight="25.0" prefWidth="68.0" text="50" />
+            <TextField fx:id="precioFinal2" disable="true" layoutX="347.0" layoutY="92.0" prefHeight="25.0" prefWidth="69.0" />
+            <TextField fx:id="porentajeUtilidad3" alignment="CENTER_RIGHT" layoutX="436.0" layoutY="54.0" onMouseClicked="#actualizarValores" prefHeight="25.0" prefWidth="68.0" text="50" />
+            <TextField fx:id="precioFinal3" disable="true" layoutX="450.0" layoutY="93.0" prefHeight="25.0" prefWidth="69.0" />
+            <TextField fx:id="precioProveedor1" alignment="CENTER_RIGHT" disable="true" layoutX="227.0" layoutY="25.0" prefHeight="25.0" prefWidth="68.0" />
+            <TextField fx:id="precioProveedor5" alignment="CENTER_RIGHT" disable="true" layoutX="125.0" layoutY="23.0" prefHeight="25.0" prefWidth="68.0" />
+            <TextField fx:id="precioProveedor2" alignment="CENTER_RIGHT" disable="true" layoutX="333.0" layoutY="26.0" prefHeight="25.0" prefWidth="68.0" />
+            <TextField fx:id="precioProveedor3" alignment="CENTER_RIGHT" disable="true" layoutX="436.0" layoutY="27.0" prefHeight="25.0" prefWidth="68.0" />
             <Text layoutX="334.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
                <font>
                   <Font name="System Bold" size="18.0" />

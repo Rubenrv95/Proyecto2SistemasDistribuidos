@@ -28,11 +28,10 @@ public class Servicentro extends Application {
     static String myIP;
     static final String HOSTsrv = "192.168.1.126"; //empresa
     static final int PUERTOsrv = 5000;
-    static final String nombre = "Estacion Curico";
+    static String nombre = "Estacion Curico";
     
     public Servicentro() throws IOException, SQLException
     {
-        iniciarListener();
     }
     
     public void conseguirIP() throws MalformedURLException, IOException
@@ -55,14 +54,18 @@ public class Servicentro extends Application {
     }
     
 
-    private void iniciarListener() throws SQLException {
+    public static void iniciarListener() throws SQLException {
         Thread hilo;
-        hilo = new ServicentroCliente(this.nombre);
+        hilo = new ServicentroCliente(Servicentro.nombre);
         hilo.start();
        
     }
-       
 
+    public static void setNombre(String nombre) {
+        Servicentro.nombre = nombre;
+    }
+       
+    
     
     public void ingresarCarga(String mensaje)
     {

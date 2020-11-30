@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.89" prefHeight="450.0" prefWidth="500.0" style="-fx-border-radius: 50px; -fx-background-radius: 50px; -fx-background-color: FireBrick;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V2_1_FXMLController">
+<AnchorPane id="AnchorPane" fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.89" prefHeight="450.0" prefWidth="500.0" style="-fx-border-radius: 50px; -fx-background-radius: 50px; -fx-background-color: FireBrick;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V2_1_FXMLController">
    <children>
       <ProgressIndicator fx:id="cargando" layoutX="106.0" layoutY="21.0" opacity="0.0" prefHeight="152.0" prefWidth="289.0">
          <effect>
@@ -26,7 +26,7 @@
                   <Font size="47.0" />
                </font>
             </Text>
-            <TextField fx:id="usuario" alignment="CENTER" layoutX="31.0" layoutY="185.0" onMouseClicked="#efectoUsuario" prefHeight="25.0" prefWidth="243.0" promptText="Nombre Sucursal" style="-fx-background-color: rgba(0,0,0,0.6); -fx-text-fill: rgba(255,255,255,1);;">
+            <TextField fx:id="usuario" alignment="CENTER" layoutX="31.0" layoutY="185.0" onMouseClicked="#efectoUsuario" prefHeight="25.0" prefWidth="243.0" promptText="Nombre Sucursal" style="-fx-background-color: rgba(0,0,0,0.6); -fx-text-fill: rgba(255,255,255,1);;" text="Estacion Curico">
                <effect>
                   <InnerShadow />
                </effect></TextField>

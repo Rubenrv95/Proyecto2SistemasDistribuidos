@@ -9,6 +9,7 @@ import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,11 +34,12 @@ public class V1_1_FXMLController implements Initializable {
     private final Pattern patronCorreo = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$", Pattern.MULTILINE);  
     
     @FXML
-    public void inicioSesion(MouseEvent evento) throws IOException{         
+    public void inicioSesion(MouseEvent evento) throws IOException, SQLException{         
         usuario.setStyle("-fx-text-fill: rgba(255,255,255,1); -fx-background-color: rgba(0,0,0,0.6);");
-        clave.setStyle("-fx-text-fill: rgba(255,255,255,1); -fx-background-color: rgba(0,0,0,0.6);");        
-        String consulta = "SELECT * FROM Usuario WHERE Usuarios='"+usuario.getText()+"' && clave='"+clave.getText()+"'";         
+        clave.setStyle("-fx-text-fill: rgba(255,255,255,1); -fx-background-color: rgba(0,0,0,0.6);");      
+
         iniciarSesion();
+        
         /*
         if(this.esCompatible(usuario.getText(), clave.getText()))           
             if(true)
