@@ -93,4 +93,10 @@ public class login {
 
 
     
+    public void crearServicentro(String nombre) throws SQLException {
+        stmt = con.createStatement();
+        rs = stmt.executeQuery("INSERT INTO sucursal VALUES ('" + nombre + "');" );
+        
+    }
+    
 }
