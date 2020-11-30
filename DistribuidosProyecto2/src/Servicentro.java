@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 
@@ -70,7 +71,8 @@ public class Servicentro extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("V2_FXML.fxml"));        
+        Parent root = FXMLLoader.load(getClass().getResource("V2_1_FXML.fxml"));   
+        
         Scene scene = new Scene(root);       
         stage.setResizable(false);
         stage.setScene(scene);
