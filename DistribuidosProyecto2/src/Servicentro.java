@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -26,9 +27,9 @@ public class Servicentro extends Application {
     static String myIP;
     static final String HOSTsrv = "192.168.1.126"; //empresa
     static final int PUERTOsrv = 5000;
-    static final String nombre = "nombre";
+    static final String nombre = "Estacion Curico";
     
-    public Servicentro() throws IOException
+    public Servicentro() throws IOException, SQLException
     {
         iniciarListener();
     }
@@ -53,7 +54,7 @@ public class Servicentro extends Application {
     }
     
 
-    private void iniciarListener() {
+    private void iniciarListener() throws SQLException {
         Thread hilo;
         hilo = new ServicentroCliente(this.nombre);
         hilo.start();
@@ -69,10 +70,9 @@ public class Servicentro extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("V2_FXML.fxml"));
-        
-        Scene scene = new Scene(root);
-        
+        Parent root = FXMLLoader.load(getClass().getResource("V2_FXML.fxml"));        
+        Scene scene = new Scene(root);       
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

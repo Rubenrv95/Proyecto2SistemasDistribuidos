@@ -4,22 +4,27 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V1_FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="640.0" style="-fx-background-color: GhostWhite;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="V1_FXMLController">
     <children>
+      <Line endX="640.0000610351562" endY="90.50001525878906" layoutY="-2.0" opacity="0.6" startY="90.5" stroke="RED" strokeWidth="3.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Line>
       <AnchorPane layoutX="15.0" layoutY="14.0" prefHeight="383.0" prefWidth="610.0">
          <children>
             <AnchorPane layoutX="136.0" prefHeight="69.0" prefWidth="339.0" style="-fx-background-color: white;">
                <effect>
-                  <InnerShadow choke="0.25" color="#00d134cb" height="126.08" radius="57.707499999999996" width="106.75">
+                  <InnerShadow choke="0.25" color="#00d134cb" height="116.41499999999999" radius="55.29125" width="106.75">
                      <input>
                         <DropShadow />
                      </input>
@@ -50,15 +55,14 @@
             </AnchorPane>
               <Button fx:id="aceptarLitro" layoutX="106.0" layoutY="105.0" onAction="#clickAceptarLitros" onMouseClicked="#actualizarPrecios" text="Carga x Litro" />
               <Label fx:id="label" layoutX="357.0" layoutY="100.0" minHeight="16" minWidth="69" />
-            <ImageView fitHeight="253.0" fitWidth="610.0" layoutY="135.0">
-               <image>
-                  <Image url="@../pump.png" />
-               </image>
-
-            </ImageView>
             <Button fx:id="aceptarMonto" layoutX="422.0" layoutY="79.0" onAction="#clickAceptarMonto" onMouseClicked="#actualizarPrecios" text="Carga x Monto" />
             <TextField fx:id="ingresoMonto" layoutX="206.0" layoutY="78.0" onAction="#actualizarPrecios" onInputMethodTextChanged="#actualizarPrecios" onMouseClicked="#actualizarPrecios" prefHeight="25.0" prefWidth="198.0" />
             <TextField fx:id="ingresoLitro" layoutX="206.0" layoutY="106.0" onAction="#actualizarPrecios" onDragDetected="#actualizarPrecios" onInputMethodTextChanged="#actualizarPrecios" onMouseClicked="#actualizarPrecios" prefHeight="25.0" prefWidth="198.0" />
+            <ImageView fitHeight="257.0" fitWidth="611.0" layoutY="136.0">
+               <image>
+                  <Image url="@Images/pump.png" />
+               </image>
+            </ImageView>
             <Text layoutX="14.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Diesel" wrappingWidth="83.00000131130219">
                <font>
                   <Font name="System Bold" size="29.0" />
@@ -167,13 +171,9 @@
       </AnchorPane>
     </children>
    <effect>
-      <InnerShadow choke="0.09" color="#000000dd" radius="53.7375" width="195.95">
+      <InnerShadow choke="0.48" color="#ffee0087" height="185.02" radius="83.6225" width="151.47">
          <input>
-            <Blend>
-               <topInput>
-                  <DropShadow />
-               </topInput>
-            </Blend>
+            <DropShadow />
          </input>
       </InnerShadow>
    </effect>

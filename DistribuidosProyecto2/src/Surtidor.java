@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  */
 public class Surtidor extends Application{
     
-    public static String nombre;
+    public static String nombre="5";
     static final String HOST = "localhost";
     static final int PUERTO = 5001;
     public static boolean ocupado = false;
@@ -39,9 +39,11 @@ public class Surtidor extends Application{
     
     public Surtidor() throws InterruptedException{
         
-        
+        crearEnBD();
         
     }
+    
+    
     
     public void conectar(){
         
@@ -56,7 +58,7 @@ public class Surtidor extends Application{
           //  launch();
             //this.start(stage);
             System.out.print("Eliga una operación: ");
-            String mensaje = reader.readLine();
+            String mensaje = "asd";
 
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
@@ -124,16 +126,16 @@ public class Surtidor extends Application{
         }
     }
     
-        public void crearEnBD(String mensje)
-    {     
+        public void crearEnBD()
+    {           
         try{
             Socket skCliente = new Socket(HOST, PUERTO);
             InputStream aux = skCliente.getInputStream();
             DataInputStream flujo = new DataInputStream( aux );
             DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
-            
-            String mensaje = "crearSurtidor"+" "+this.nombre; //Instruccion + litros de carga + nombre surtidor
 
+            String mensaje = "crearSurtidor"+" "+this.nombre; 
+            
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
             skCliente.close();
@@ -198,7 +200,7 @@ public class Surtidor extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
         
         Scene scene = new Scene(root);
-        
+        primaryStage.setResizable(false);        
         primaryStage.setScene(scene);
         primaryStage.show();
     }

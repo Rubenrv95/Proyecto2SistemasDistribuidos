@@ -75,10 +75,28 @@ public class login {
         
         ////Guardar info en BDD, mensaje[1] 93, mensaje[2] 95, mensaje[3] 97, mensaje[4] Diesel, mensaje[5] kerosene
     }
+
+    void crearSurtidor(String[] mensaje) throws SQLException {
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        stmt = con.createStatement();
+        stmt.executeUpdate("INSERT INTO surtidor (ID, monto_recaudado, refSucursal) SELECT * FROM (SELECT '"+mensaje[1]+"', '0', '"+mensaje[2]+"') AS tmp WHERE NOT EXISTS ( SELECT ID, refSucursal FROM surtidor WHERE ID = '"+mensaje[1]+"' AND refSucursal = '"+mensaje[2]+"') LIMIT 1;  ");
+        System.out.println(mensaje[1] +" "+ mensaje[2]);
+        /*
+            INSERT INTO surtidor (ID, monto_recaudado, refSucursal)
+            SELECT * FROM (SELECT '"+mensaje[1]+"', '0', '"+mensaje[2]+"') AS tmp
+            WHERE NOT EXISTS (
+            SELECT ID, refSucursal FROM surtidor WHERE ID = '"+mensaje[1]+"' AND refSucursal = '"+mensaje[2]+"'
+        ) LIMIT 1;   
+        
+        */
+
+    }
+
+
     
     public void crearServicentro(String nombre) throws SQLException {
         stmt = con.createStatement();
-        rs = stmt.executeQuery("INSERT INTO sucursal VALUES ('" + nombre + "');" );
+        stmt.executeUpdate("INSERT INTO sucursal(nombre, monto_recaudado) VALUES ('" + nombre + "', 0);" );
         
     }
     
