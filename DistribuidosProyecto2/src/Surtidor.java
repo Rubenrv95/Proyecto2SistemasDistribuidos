@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  */
 public class Surtidor extends Application{
     
-    public static String nombre;
+    public static String nombre="5";
     static final String HOST = "localhost";
     static final int PUERTO = 5001;
     public static boolean ocupado = false;

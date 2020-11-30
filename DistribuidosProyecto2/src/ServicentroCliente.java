@@ -76,8 +76,6 @@ public class ServicentroCliente extends Thread{
                 mensaje[2] = this.nombre;
                 l.crearSurtidor(mensaje);
                 break;
-        }
-        
-        
+        }      
     }
 }
