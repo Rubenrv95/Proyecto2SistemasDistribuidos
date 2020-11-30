@@ -40,7 +40,6 @@ public class Surtidor extends Application{
     
     public Surtidor() throws InterruptedException{
         
-        crearEnBD();
         
     }
     
@@ -150,7 +149,7 @@ public class Surtidor extends Application{
         }
     }
     
-        public void crearEnBD()
+        public static void crearEnBD()
     {           
         try{
             Socket skCliente = new Socket(HOST, PUERTO);
@@ -158,7 +157,7 @@ public class Surtidor extends Application{
             DataInputStream flujo = new DataInputStream( aux );
             DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
 
-            String mensaje = "crearSurtidor"+" "+this.nombre; 
+            String mensaje = "crearSurtidor"+" "+Surtidor.nombre; 
             
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
@@ -216,6 +215,11 @@ public class Surtidor extends Application{
         Surtidor.valorKerosene = valorKerosene;
     }
 
+    public static void setNombre(String nombre) {
+        Surtidor.nombre = nombre;
+    }
+
+    
     
 
     @Override

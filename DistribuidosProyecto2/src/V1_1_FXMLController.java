@@ -37,8 +37,9 @@ public class V1_1_FXMLController implements Initializable {
     public void inicioSesion(MouseEvent evento) throws IOException, SQLException{         
         usuario.setStyle("-fx-text-fill: rgba(255,255,255,1); -fx-background-color: rgba(0,0,0,0.6);");
         clave.setStyle("-fx-text-fill: rgba(255,255,255,1); -fx-background-color: rgba(0,0,0,0.6);");      
-
+        Surtidor.setNombre(usuario.getText());
         iniciarSesion();
+        Surtidor.crearEnBD();
         
         /*
         if(this.esCompatible(usuario.getText(), clave.getText()))           

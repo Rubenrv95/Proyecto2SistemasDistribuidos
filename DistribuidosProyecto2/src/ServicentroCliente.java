@@ -66,6 +66,7 @@ public class ServicentroCliente extends Thread{
                 
                 String mensaje = dIn.readUTF();               
                 if (mensaje.endsWith("consultarValores")) {
+                    actualizarPrecios();
                     flujo.writeUTF(Integer.toString(valor93+(valor93*utilidad93/100))+" "+Integer.toString(valor95+(valor95*utilidad95/100))+" "+Integer.toString(valor97+(valor97*utilidad97/100))+" "+Integer.toString(valorDiesel+(valorDiesel*utilidadDiesel/100))+" "+Integer.toString(valorKerosene+(valorKerosene*utilidadKerosene/100)));
                 }
                 else
