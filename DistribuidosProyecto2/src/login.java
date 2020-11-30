@@ -108,8 +108,45 @@ public class login {
         
     }
 
-    void generarCarga(String[] destiny) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void generarCarga(String[] mensaje) throws SQLException {
+        stmt = con.createStatement();
+             
+        rs = stmt.executeQuery("SELECT * FROM surtidor WHERE refSucursal = '" + mensaje[4] + "';");
+        
+        double monto_surtidor =0;
+        while (rs.next()) {
+            if (rs.getInt("ID") == Integer.parseInt(mensaje[2])) {
+                monto_surtidor = rs.getDouble("monto_recaudado");
+                break;
+            }
+        }
+        
+        monto_surtidor += Integer.parseInt(mensaje[3]);
+        
+        stmt.executeUpdate("UPDATE surtidor SET monto_recaudado = " + monto_surtidor + " WHERE surtidor.ID = " + mensaje[2] + " AND refSucursal = '" + mensaje[4] + "';");
+        
+        System.out.println("Monto del surtidor: " + monto_surtidor);
+        
+        rs = stmt.executeQuery("SELECT * FROM sucursal WHERE nombre = '" + mensaje[4] + "';");
+        
+        double monto_sucursal = 0;
+        while (rs.next()) {
+            monto_sucursal = rs.getDouble("monto_recaudado");
+            break;
+        }
+        
+        System.out.println("Monto de sucursal: " + monto_sucursal);
+
+        
+        double total = monto_surtidor + monto_sucursal;
+        System.out.println(total);
+        
+        
+        stmt.executeUpdate("UPDATE sucursal SET monto_recaudado = " + total + " WHERE sucursal.nombre = '" + mensaje[4] + "';");
+        
+        System.out.println("Se actualizó la wea");
+        
+        
         //Guardar info en BDD, mensaje[1] cantidadLitros, mensaje[2] nombreSurtidor, mensaje[3] Monto a pagar, mensaje [4] nobmreServicentro
     }
     
