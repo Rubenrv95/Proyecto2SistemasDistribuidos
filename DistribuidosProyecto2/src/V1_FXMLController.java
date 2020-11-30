@@ -5,7 +5,10 @@
  */
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,6 +55,8 @@ public class V1_FXMLController implements Initializable {
         
         //  actualizarPrecios();
     }
+    
+    
     
     @FXML
     private void clickAceptarMonto(ActionEvent event) {
@@ -104,8 +109,9 @@ public class V1_FXMLController implements Initializable {
     }     
     
     @FXML
-    private void actualizarPrecios()
+    private void actualizarPrecios() throws SQLException
     {
+        Surtidor.actualizarPrecios();
         precioBencina93.setText(Integer.toString(Surtidor.getValor93()));
         precioBencina95.setText(Integer.toString(Surtidor.getValor95()));
         precioBencina97.setText(Integer.toString(Surtidor.getValor97()));
@@ -128,6 +134,10 @@ public class V1_FXMLController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.actualizarPrecios();
+        try {
+            this.actualizarPrecios();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1_FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }        
 }

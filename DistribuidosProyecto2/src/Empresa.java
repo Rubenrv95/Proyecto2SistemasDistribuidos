@@ -24,13 +24,14 @@ public class Empresa extends Application {
     static final int PUERTO=5000;
     static final int PUERTOsrv=5001;
 
-    ArrayList<String> hosts = new ArrayList<>();
+    static ArrayList<String> hosts = new ArrayList<>();
     
     public Empresa () {
+        hosts.add("192.168.1.126");
         //actualizarPrecios();
     }
     
-    public void actualizarPrecios(int noventaYTres, int noventaYCinco, int noventaYSiete, int diesel, int kerosene)
+    public static void actualizarPrecios(int noventaYTres, int noventaYCinco, int noventaYSiete, int diesel, int kerosene)
     {
         for (int i = 0; i < hosts.size(); i++) {
         try{
@@ -38,7 +39,7 @@ public class Empresa extends Application {
             InputStream aux = skCliente.getInputStream();
             DataInputStream flujo = new DataInputStream( aux );
             DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
-            String mensaje = "actualizarPrecios"+noventaYTres+" "+noventaYCinco+" "+noventaYSiete+" "+diesel+" "+kerosene;
+            String mensaje = "actualizarPrecios "+noventaYTres+" "+noventaYCinco+" "+noventaYSiete+" "+diesel+" "+kerosene;
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
             skCliente.close();

@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -68,13 +69,36 @@ public class Surtidor extends Application{
         }
     }
     
-    public void actualizarPrecios() throws SQLException
+    public static void actualizarPrecios() throws SQLException
     {
-        this.valor93= l.obtenerPrecio("valor93");
-        this.valor95= l.obtenerPrecio("valor95");
-        this.valor97= l.obtenerPrecio("valor97");
-        this.valorDiesel=l.obtenerPrecio("valorDiesel"); 
-        this.valorKerosene=l.obtenerPrecio("valorKerosene");
+        try{
+            Socket skCliente = new Socket(HOST, PUERTO);
+            InputStream aux = skCliente.getInputStream();
+            DataInputStream flujo = new DataInputStream( aux );
+            DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            //Stage stage = new Stage();
+          //  launch();
+            //this.start(stage);
+            //System.out.print("Eliga una operación: ");
+            String mensaje = "consultarValores";
+
+            dOut.writeUTF(mensaje);
+            
+            String respuesta[] = flujo.readUTF().split(" ") ;
+            skCliente.close();
+            Surtidor.valor93 = Integer.parseInt(respuesta[0]);
+            Surtidor.valor95 = Integer.parseInt(respuesta[1]);
+            Surtidor.valor97 = Integer.parseInt(respuesta[2]);
+            Surtidor.valorDiesel = Integer.parseInt(respuesta[3]);
+            Surtidor.valorKerosene = Integer.parseInt(respuesta[4]);
+           
+        } catch(Exception e ) {
+            System.out.println( e.getMessage() );
+        }
+        
+
     }
     
     public static void generarCarga(int cantidad, boolean litros, String tipo) throws InterruptedException
@@ -197,7 +221,7 @@ public class Surtidor extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         actualizarPrecios();
-        Parent root = FXMLLoader.load(getClass().getResource("V1_FXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("V1_1_FXML.fxml"));
         
         Scene scene = new Scene(root);
         primaryStage.setResizable(false);        
