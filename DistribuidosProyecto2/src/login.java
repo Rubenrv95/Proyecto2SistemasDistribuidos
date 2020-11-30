@@ -96,6 +96,14 @@ public class login {
     
     public void crearServicentro(String nombre) throws SQLException {
         stmt = con.createStatement();
+
+        rs = stmt.executeQuery("SELECT nombre FROM sucursal;");
+        while (rs.next()) {
+            if (rs.getString("nombre").equals(nombre)) {
+                System.out.println("Ya existe esa sucursal en nuestra base de datos. Pruebe con otro nombre");
+                return;
+            }
+        }   
         stmt.executeUpdate("INSERT INTO sucursal(nombre, monto_recaudado) VALUES ('" + nombre + "', 0);" );
         
     }
