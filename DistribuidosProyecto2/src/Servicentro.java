@@ -1,5 +1,17 @@
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,35 +23,24 @@ import java.net.*;
  *
  * @author Luciano
  */
-public class Servicentro {
+public class Servicentro extends Application {
     
-    int valor93;
-    int valor95;
-    int valor97;
-    int valorDiesel;
-    int valorKerosene;
+    static String myIP;
+    static final String HOSTsrv = "192.168.1.126"; //empresa
+    static final int PUERTOsrv = 5000;
+    static String nombre = "Estacion Curico";
     
-    static final String HOST = "localhost";
-    static final int PUERTO=5000;
-    
-    public Servicentro()
+    public Servicentro() throws IOException, SQLException
     {
-        try{
-        Socket skCliente = new Socket(HOST, PUERTO);
-        InputStream aux = skCliente.getInputStream();
-        DataInputStream flujo = new DataInputStream( aux );
-        DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Eliga una operación]: ");
-        String mensaje = "poto";
-
-        dOut.writeUTF(mensaje);
-        System.out.println( flujo.readUTF() );
-        skCliente.close();
-        } catch(Exception e ) {
-            System.out.println( e.getMessage() );
-        }
+    }
+    
+    public void conseguirIP() throws MalformedURLException, IOException
+    {
+        URL whatismyip = new URL("http://checkip.amazonaws.com");
+        BufferedReader in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
+        String ip = in.readLine(); //you get the IP as a String
+        System.out.println(ip);
+        myIP = ip;
     }
     
     public void generarReporte()
@@ -52,13 +53,44 @@ public class Servicentro {
         
     }
     
+
+    public static void iniciarListener() throws SQLException {
+        Thread hilo;
+        hilo = new ServicentroCliente(Servicentro.nombre);
+        hilo.start();
+       
+    }
+
+    public static void setNombre(String nombre) {
+        Servicentro.nombre = nombre;
+    }
+       
     
+    
+    public void ingresarCarga(String mensaje)
+    {
+        
+    }
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("V2_1_FXML.fxml"));   
+        
+        Scene scene = new Scene(root);       
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        new Servicentro();
+    public static void main(String[] args) throws IOException {
+        
+        launch();
+        
     }
+
+
     
 }
