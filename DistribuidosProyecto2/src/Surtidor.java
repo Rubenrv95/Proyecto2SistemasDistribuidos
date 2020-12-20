@@ -1,9 +1,19 @@
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import static java.lang.Thread.sleep;
 import java.net.Socket;
 import java.sql.SQLException;
@@ -39,7 +49,6 @@ public class Surtidor extends Application{
     login l = new login();
     
     public Surtidor() throws InterruptedException{
-        
         
     }
     
@@ -95,9 +104,7 @@ public class Surtidor extends Application{
            
         } catch(Exception e ) {
             System.out.println( e.getMessage() );
-        }
-        
-
+        }     
     }
     
     public static void generarCarga(int cantidad, boolean litros, String tipo) throws InterruptedException
@@ -133,17 +140,23 @@ public class Surtidor extends Application{
         }
         int total=cantidad*valorActual;
         Surtidor.ocupado=false;
+        
+        String mensaje = "generarCarga"+" "+cantidad+" "+ Surtidor.nombre +" "+total+" false"; //Instruccion + litros de carga + nombre surtidor
+        guardarLocal(mensaje);
+        
         try{
             Socket skCliente = new Socket(HOST, PUERTO);
             InputStream aux = skCliente.getInputStream();
             DataInputStream flujo = new DataInputStream( aux );
             DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
             
-            String mensaje = "generarCarga"+" "+cantidad+" "+ Surtidor.nombre +" "+total; //Instruccion + litros de carga + nombre surtidor
+
 
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
             skCliente.close();
+            
+            modificarFalse();
         } catch(Exception e ) {
             System.out.println( e.getMessage() );
         }
@@ -164,6 +177,62 @@ public class Surtidor extends Application{
             skCliente.close();
         } catch(Exception e ) {
             System.out.println( e.getMessage() );
+        }
+    }
+        
+    public static void guardarLocal(String mensaje)
+    {
+        try{
+            String verify, putData;
+            File file = new File("logSurtidor.txt");
+            //file.createNewFile();
+            FileWriter fw = new FileWriter(file, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(mensaje+"\n");
+            bw.flush();     
+            bw.close();
+
+
+        }catch(IOException e){
+        e.printStackTrace();
+        }
+    }
+    
+    public static void modificarFalse() throws IOException
+    {
+
+        
+        try{
+            String verify, putData;
+            File fileOriginal = new File("logSurtidor.txt");
+            File fileCopy = new File("logSurtidorCopia.txt");
+            fileCopy.createNewFile();
+            FileWriter fw = new FileWriter("logSurtidorCopia.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+           // bw.flush();
+            
+            FileReader fr = new FileReader("logSurtidor.txt");
+            BufferedReader br = new BufferedReader(fr);
+
+            while( (verify=br.readLine()) != null ){ //***editted
+                       //**deleted**verify = br.readLine();**
+                if(verify != null){ //***edited
+                    putData = verify.replaceAll("false", "true");
+                    
+                    bw.write(putData+"\n");
+                }
+                
+            }
+            bw.close();
+            br.close();
+            
+            fileOriginal.delete();
+            fileCopy.renameTo(fileOriginal);
+            
+
+
+        }catch(IOException e){
+        e.printStackTrace();
         }
     }
         
