@@ -47,18 +47,13 @@ public class Servicentro extends Application {
     {
         
     }
-    
-    public void calcularFactorUtilidad()
-    {
-        
-    }
-    
-    
+  
     
 
     public static void iniciarListener() throws SQLException {
         Thread hilo;
         hilo = new ServicentroCliente(Servicentro.nombre);
+        hilo.setDaemon(true);
         hilo.start();
        
     }

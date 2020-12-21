@@ -17,6 +17,8 @@ import java.io.OutputStream;
 import static java.lang.Thread.sleep;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,7 +56,7 @@ public class Surtidor extends Application{
     
     
     
-    public void conectar(){
+    public static boolean conectar(){
         
             try{
             Socket skCliente = new Socket(HOST, PUERTO);
@@ -66,15 +68,16 @@ public class Surtidor extends Application{
             //Stage stage = new Stage();
           //  launch();
             //this.start(stage);
-            System.out.print("Eliga una operación: ");
-            String mensaje = "asd";
+            String mensaje = "verificarConexión";
 
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
             skCliente.close();
+            return true;
         } catch(Exception e ) {
             System.out.println( e.getMessage() );
         }
+        return false;
     }
     
     public static void actualizarPrecios() throws SQLException
@@ -109,41 +112,54 @@ public class Surtidor extends Application{
     
     public static void generarCarga(int cantidad, boolean litros, String tipo) throws InterruptedException
     {
-        int  valorActual=0; //= consulta bd;
-        switch (tipo)
+        if (conectar())
         {
-            case "1":   //93
-                valorActual=Surtidor.valor93; 
-                break;
-            case "2":   //95
-                valorActual=Surtidor.valor95; 
-                break;
-            case "3":   //97
-                valorActual=Surtidor.valor97; 
-                break;
-            case "4":   //Diesel
-                valorActual=Surtidor.valorDiesel; 
-                break;
-            case "5":   //Kerosene
-                valorActual=Surtidor.valorKerosene;
-                break;
-                    
-        }        
-        
-        Surtidor.ocupado=true;
-        if (litros) {
-            sleep(cantidad);
+            System.out.println("Primera conexion lograda");
+            int  valorActual=0; //= consulta bd;
+            switch (tipo)
+            {
+                case "1":   //93
+                    valorActual=Surtidor.valor93; 
+                    break;
+                case "2":   //95
+                    valorActual=Surtidor.valor95; 
+                    break;
+                case "3":   //97
+                    valorActual=Surtidor.valor97; 
+                    break;
+                case "4":   //Diesel
+                    valorActual=Surtidor.valorDiesel; 
+                    break;
+                case "5":   //Kerosene
+                    valorActual=Surtidor.valorKerosene;
+                    break;
+
+            }        
+            Surtidor.ocupado=true;
+            if (litros) {
+                sleep(cantidad*1000);
+            }
+            else{
+                cantidad = cantidad/valorActual;
+                sleep(cantidad*1000);
+            }
+            int total=cantidad*valorActual;
+            Surtidor.ocupado=false;
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();  
+
+            
+            String mensaje = "generarCarga"+" "+cantidad+" "+ Surtidor.nombre +" "+total+" false "+dtf.format(now); //Instruccion + litros de carga + nombre surtidor
+            guardarLocal(mensaje);
+            enviarCarga(mensaje);   
         }
-        else{
-            cantidad = cantidad/valorActual;
-            sleep(cantidad);
-        }
-        int total=cantidad*valorActual;
-        Surtidor.ocupado=false;
-        
-        String mensaje = "generarCarga"+" "+cantidad+" "+ Surtidor.nombre +" "+total+" false"; //Instruccion + litros de carga + nombre surtidor
-        guardarLocal(mensaje);
-        
+    
+
+    }
+    
+    public static void enviarCarga (String mensaje)
+    {
         try{
             Socket skCliente = new Socket(HOST, PUERTO);
             InputStream aux = skCliente.getInputStream();
@@ -154,11 +170,12 @@ public class Surtidor extends Application{
 
             dOut.writeUTF(mensaje);
             System.out.println( flujo.readUTF() );
-            skCliente.close();
-            
+            skCliente.close();            
             modificarFalse();
+            System.out.println("Carga lograda, Envio logrado");
         } catch(Exception e ) {
             System.out.println( e.getMessage() );
+            System.out.println("Carga lograda, Envio fallido");
         }
     }
     
@@ -191,6 +208,7 @@ public class Surtidor extends Application{
             bw.write(mensaje+"\n");
             bw.flush();     
             bw.close();
+            
 
 
         }catch(IOException e){
@@ -198,7 +216,36 @@ public class Surtidor extends Application{
         }
     }
     
-    public static void modificarFalse() throws IOException
+    public static String verificarNoEnviado()
+    {
+        File tmpDir = new File("logSurtidor.txt");
+        if (tmpDir.exists())
+            
+        {
+            try {
+                BufferedReader reader;
+                reader = new BufferedReader(new FileReader("logSurtidor.txt"));
+                String line = reader.readLine();
+                while (line != null) {
+                        System.out.println(line);
+                        if(line.toLowerCase().indexOf("false".toLowerCase()) != -1)
+                        {
+                            reader.close();
+                            return line;
+                        }
+                        line = reader.readLine();
+                }
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        
+        return "NULO";
+    }
+    
+    public static void modificarFalse() throws IOException, InterruptedException
     {
 
         
@@ -223,8 +270,11 @@ public class Surtidor extends Application{
                 }
                 
             }
+
+
             bw.close();
             br.close();
+            fw.close();
             
             fileOriginal.delete();
             fileCopy.renameTo(fileOriginal);
@@ -234,6 +284,8 @@ public class Surtidor extends Application{
         }catch(IOException e){
         e.printStackTrace();
         }
+        
+        
     }
         
     /**
@@ -294,6 +346,16 @@ public class Surtidor extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         actualizarPrecios();
+        String noEnviado;
+        noEnviado = verificarNoEnviado();
+        if (!noEnviado.equals("NULO"))
+        {
+            enviarCarga(noEnviado);
+            System.out.println(noEnviado);
+            
+        }
+        else
+            System.out.println("No hay cargas sin enviar");
         Parent root = FXMLLoader.load(getClass().getResource("V1_1_FXML.fxml"));
         
         Scene scene = new Scene(root);
