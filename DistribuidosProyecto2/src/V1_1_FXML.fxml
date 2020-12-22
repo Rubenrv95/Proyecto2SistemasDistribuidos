@@ -26,7 +26,7 @@
                   <Font size="47.0" />
                </font>
             </Text>
-            <TextField fx:id="usuario" alignment="CENTER" layoutX="31.0" layoutY="185.0" onMouseClicked="#efectoUsuario" prefHeight="25.0" prefWidth="243.0" promptText="Nombre Sucursal" style="-fx-background-color: rgba(0,0,0,0.6); -fx-text-fill: rgba(255,255,255,1);;" text="Estacion Curico">
+            <TextField fx:id="usuario" alignment="CENTER" layoutX="31.0" layoutY="185.0" onMouseClicked="#efectoUsuario" prefHeight="25.0" prefWidth="243.0" promptText="Nombre Sucursal" style="-fx-background-color: rgba(0,0,0,0.6); -fx-text-fill: rgba(255,255,255,1);;" text="1">
                <effect>
                   <InnerShadow />
                </effect></TextField>

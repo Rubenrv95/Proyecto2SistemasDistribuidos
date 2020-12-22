@@ -19,6 +19,7 @@ import java.net.Socket;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -47,6 +48,7 @@ public class Surtidor extends Application{
     public static int valor97;
     public static int valorDiesel;
     public static int valorKerosene;
+    public static int intentos =5;
     
     login l = new login();
     
@@ -137,12 +139,12 @@ public class Surtidor extends Application{
             }        
             Surtidor.ocupado=true;
             if (litros) {
-                sleep(cantidad*1000);
             }
             else{
                 cantidad = cantidad/valorActual;
-                sleep(cantidad*1000);
+                
             }
+            
             int total=cantidad*valorActual;
             Surtidor.ocupado=false;
 
@@ -152,6 +154,7 @@ public class Surtidor extends Application{
             
             String mensaje = "generarCarga"+" "+cantidad+" "+ Surtidor.nombre +" "+total+" false "+dtf.format(now); //Instruccion + litros de carga + nombre surtidor
             guardarLocal(mensaje);
+            sleep(cantidad*1000);
             enviarCarga(mensaje);   
         }
     
@@ -160,23 +163,34 @@ public class Surtidor extends Application{
     
     public static void enviarCarga (String mensaje)
     {
-        try{
-            Socket skCliente = new Socket(HOST, PUERTO);
-            InputStream aux = skCliente.getInputStream();
-            DataInputStream flujo = new DataInputStream( aux );
-            DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
-            
+        boolean logrado = false;
+        int i=1;
+        while(!logrado)
+        {
+            try{
+                Socket skCliente = new Socket(HOST, PUERTO);
+                InputStream aux = skCliente.getInputStream();
+                DataInputStream flujo = new DataInputStream( aux );
+                DataOutputStream dOut = new DataOutputStream(skCliente.getOutputStream());
 
 
-            dOut.writeUTF(mensaje);
-            System.out.println( flujo.readUTF() );
-            skCliente.close();            
-            modificarFalse();
-            System.out.println("Carga lograda, Envio logrado");
-        } catch(Exception e ) {
-            System.out.println( e.getMessage() );
-            System.out.println("Carga lograda, Envio fallido");
+
+                dOut.writeUTF(mensaje);
+                System.out.println( flujo.readUTF() );
+                skCliente.close();            
+                logrado = true;
+                System.out.println("Carga lograda, Envio logrado");
+            } catch(Exception e ) {
+                System.out.println( e.getMessage() );
+                System.out.println("Carga lograda, Envio fallido, intento #"+i);
+                i++;
+            }
+            if (i==intentos+1) {
+                System.out.println("Limite de intentos alcanzado, intente restablecer conexion con servicentro");
+                logrado=true;
+            }            
         }
+        
     }
     
         public static void crearEnBD()
@@ -216,8 +230,9 @@ public class Surtidor extends Application{
         }
     }
     
-    public static String verificarNoEnviado()
+    public static ArrayList verificarNoEnviado()
     {
+        ArrayList<String> errores = new ArrayList<>();
         File tmpDir = new File("logSurtidor.txt");
         if (tmpDir.exists())
             
@@ -230,8 +245,8 @@ public class Surtidor extends Application{
                         System.out.println(line);
                         if(line.toLowerCase().indexOf("false".toLowerCase()) != -1)
                         {
-                            reader.close();
-                            return line;
+                            errores.add(line);
+                            guardarLogErrores(line);                            
                         }
                         line = reader.readLine();
                 }
@@ -242,12 +257,33 @@ public class Surtidor extends Application{
         }
         
         
-        return "NULO";
+        return errores;
+    }
+    
+    public static void guardarLogErrores(String mensaje) throws IOException
+    {    
+        File file = new File("logErroresSurtidor.txt");
+        if (!file.exists())
+        {
+            file.createNewFile();
+        }
+        try{
+            FileWriter fw = new FileWriter(file, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(mensaje+"\n");
+            bw.flush();     
+            bw.close();
+            
+
+
+        }catch(IOException e){
+        e.printStackTrace();
+        }    
     }
     
     public static void modificarFalse() throws IOException, InterruptedException
     {
-
+        
         
         try{
             String verify, putData;
@@ -346,16 +382,23 @@ public class Surtidor extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         actualizarPrecios();
-        String noEnviado;
-        noEnviado = verificarNoEnviado();
-        if (!noEnviado.equals("NULO"))
-        {
-            enviarCarga(noEnviado);
-            System.out.println(noEnviado);
+        if (conectar()) {
             
+            String noEnviado;
+            ArrayList<String> errores = verificarNoEnviado();
+            if (errores.size()>0)
+            {
+                for (int i = 0; i < errores.size(); i++) {
+                    enviarCarga(errores.get(i));
+                    System.out.println(errores.get(i)+" ha sido enviado");
+                    modificarFalse();
+                }
+            
+            }
+            else
+                System.out.println("No hay cargas sin enviar");
         }
-        else
-            System.out.println("No hay cargas sin enviar");
+        
         Parent root = FXMLLoader.load(getClass().getResource("V1_1_FXML.fxml"));
         
         Scene scene = new Scene(root);
